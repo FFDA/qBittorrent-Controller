@@ -9,12 +9,14 @@
 
 package com.lgallardo.qbittorrentclient;
 
-/**
+/*
  * Created by lgallard on 28/08/15.
  */
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,8 +121,9 @@ public class TrackersRecyclerViewAdapter extends RecyclerView.Adapter<TrackersRe
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
+    @NonNull
     @Override
-    public TrackersRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TrackersRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 //        Log.d("Debug", "onCreateViewHolder invoked");
 
@@ -128,8 +131,7 @@ public class TrackersRecyclerViewAdapter extends RecyclerView.Adapter<TrackersRe
         if (viewType == TYPE_TRACKER_ITEM) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.tracker_row, parent, false); //Inflating the layout
-            ViewHolder vhItem = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
-            return vhItem; // Returning the created object
+            return new ViewHolder(v, viewType); // Returning the created object
 
         }
 
@@ -141,7 +143,7 @@ public class TrackersRecyclerViewAdapter extends RecyclerView.Adapter<TrackersRe
     // Tells us item at which position is being constructed to be displayed and the holder id of the holder object tell us
     // which view type is being created 1 for item row
     @Override
-    public void onBindViewHolder(TrackersRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TrackersRecyclerViewAdapter.ViewHolder holder, int position) {
 
         TorrentDetailsItem item = items.get(position);
 

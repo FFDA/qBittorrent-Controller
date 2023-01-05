@@ -17,7 +17,7 @@
         android:background="?backgroundSelector"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:paddingTop="10dp">
 
         <ImageView

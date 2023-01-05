@@ -7,7 +7,8 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -75,19 +76,14 @@
                         android:indeterminate="false"
                         android:max="100"
                         android:progress="1"
-                        android:layout_gravity="right" />
+                        android:layout_gravity="end" />
                 </LinearLayout>
-
-
-
-
         </LinearLayout>
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#95e7e7e7"
-             />
+            android:background="#95e7e7e7" />
 
     </LinearLayout>
 

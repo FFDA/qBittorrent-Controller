@@ -398,7 +398,7 @@ public class NotifierService extends BroadcastReceiver {
             @Override
             public void onSuccess(List<Torrent> torrents) {
 
-                String infoString = "";
+                String infoString;
                 String sizeInfo, downloadedInfo, progressInfo, etaInfo, uploadSpeedInfo, downloadSpeedInfo, ratioInfo;
 
                 for (int i = 0; i < torrents.size(); i++) {
@@ -462,7 +462,7 @@ public class NotifierService extends BroadcastReceiver {
                 String[] completedNames;
 
                 for (int i = 0; i < completedHashesArray.length; i++) {
-                    Log.i("Debug", "[NS][getTorrentList] Last completed: " + completedHashesArray[i]);
+//                    Log.i("Debug", "[NS][getTorrentList] Last completed: " + completedHashesArray[i]);
                     last_completed.put(completedHashesArray[i], null);
                 }
 
@@ -481,7 +481,7 @@ public class NotifierService extends BroadcastReceiver {
                             } else {
                                 completedHashes += "|" + torrents.get(i).getHash();
                             }
-                            Log.i("Debug", "[NS][getTorrentList] completedHashes: " + completedHashes);
+//                            Log.i("Debug", "[NS][getTorrentList] completedHashes: " + completedHashes);
                         }
                     }
 
@@ -525,7 +525,7 @@ public class NotifierService extends BroadcastReceiver {
 
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("from", "NotifierService");
-                        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                         it = notify.entrySet().iterator();
 
@@ -557,27 +557,21 @@ public class NotifierService extends BroadcastReceiver {
                         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                         Notification notification;
 
-                        if (android.os.Build.VERSION.SDK_INT >= 16) {
+                        // Define and Inbox
+                        InboxStyle inbox = new InboxStyle(builder);
 
-                            // Define and Inbox
-                            InboxStyle inbox = new Notification.InboxStyle(builder);
+                        inbox.setBigContentTitle(NotifierService.context.getString(R.string.notifications_completed_torrents));
 
-                            inbox.setBigContentTitle(NotifierService.context.getString(R.string.notifications_completed_torrents));
+                        completedNames = info.split(",");
 
-                            completedNames = info.split(",");
+                        for (int j = 0; j < completedNames.length && j < 4; j++) {
 
-                            for (int j = 0; j < completedNames.length && j < 4; j++) {
-
-                                if (completedNames[j] != null)
-                                inbox.addLine(completedNames[j].trim());
-                            }
-
-                            inbox.setSummaryText(NotifierService.context.getString(R.string.notifications_total));
-                            notification = inbox.build();
-
-                        } else {
-                            notification = builder.getNotification();
+                            if (completedNames[j] != null)
+                            inbox.addLine(completedNames[j].trim());
                         }
+
+                        inbox.setSummaryText(NotifierService.context.getString(R.string.notifications_total));
+                        notification = inbox.build();
 
                         notificationManager.notify(0, notification);
                     }

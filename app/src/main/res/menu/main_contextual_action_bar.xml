@@ -14,77 +14,77 @@
     <item
         android:id="@+id/action_resume"
         android:icon="@drawable/ic_action_resume"
-        android:showAsAction="always"
-        android:title="@string/action_resume" />
+        android:title="@string/action_resume"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_pause"
         android:icon="@drawable/ic_action_pause"
-        android:showAsAction="always"
-        android:title="@string/action_pause" />
+        android:title="@string/action_pause"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_action_delete"
-        android:showAsAction="always"
-        android:title="@string/action_delete" />
+        android:title="@string/action_delete"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_delete_drive"
         android:icon="@drawable/ic_action_delete_drive"
-        android:showAsAction="always"
-        android:title="@string/action_delete_drive" />
+        android:title="@string/action_delete_drive"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_force_start"
         android:icon="@drawable/ic_action_force_start"
-        android:showAsAction="always"
-        android:title="@string/action_force_start" />
+        android:title="@string/action_force_start"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_priority_menu"
         android:icon="@drawable/ic_action_increase_prio"
-        android:showAsAction="ifRoom"
-        android:title="@string/torrent_priority_menu">
+        android:title="@string/torrent_priority_menu"
+        app:showAsAction="ifRoom">
 
         <menu>
             <item
                 android:id="@+id/action_increase_prio"
                 android:icon="@drawable/ic_action_increase_prio"
-                android:showAsAction="ifRoom"
-                android:title="@string/action_increase_priority" />
+                android:title="@string/action_increase_priority"
+                app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/action_decrease_prio"
                 android:icon="@drawable/ic_action_decrease_prio"
-                android:showAsAction="ifRoom"
-                android:title="@string/action_decrease_priority" />
+                android:title="@string/action_decrease_priority"
+                app:showAsAction="ifRoom" />
 
             <item
                 android:id="@+id/action_max_prio"
                 android:icon="@drawable/ic_action_max_prio"
-                android:showAsAction="ifRoom"
-                android:title="@string/action_maximum_priority" />
+                android:title="@string/action_maximum_priority"
+                app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/action_min_prio"
                 android:icon="@drawable/ic_action_min_prio"
-                android:showAsAction="ifRoom"
-                android:title="@string/action_minimum_priority" />
+                android:title="@string/action_minimum_priority"
+                app:showAsAction="ifRoom" />
         </menu>
     </item>
     <item
         android:id="@+id/action_download_rate_limit"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_download_rate_limit" />
+        android:title="@string/action_download_rate_limit"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_upload_rate_limit"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_upload_rate_limit" />
+        android:title="@string/action_upload_rate_limit"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_recheck"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_force_recheck" />
     <item
         android:id="@+id/action_sequential_download"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/torrent_details_seq_download"/>
     <item
         android:id="@+id/action_first_last_piece_prio"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/torrent_details_first_last" />
     <item
         android:id="@+id/action_label_menu"
@@ -96,13 +96,13 @@
                 android:id="@+id/action_set_category"
                 android:icon="@drawable/ic_drawer_categories"
                 android:title="@string/action_set_category"
-                android:showAsAction="ifRoom" />
+                app:showAsAction="ifRoom" />
 
             <item
                 android:id="@+id/action_delete_category"
                 android:icon="@drawable/ic_action_delete_drive"
                 android:title="@string/action_delete_category"
-                android:showAsAction="ifRoom" />
+                app:showAsAction="ifRoom" />
         </menu>
 
     </item>

@@ -17,13 +17,15 @@
         android:id="@+id/textUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/url"
         android:text="@string/dialog_add_url" />
 
     <EditText
         android:id="@+id/url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        android:inputType="textUri">
 
         <requestFocus />
     </EditText>

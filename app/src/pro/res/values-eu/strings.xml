@@ -60,7 +60,7 @@
     <string name="increasePrioTorrent">Lehentasuna handituta!</string>
     <string name="decreasePrioTorrent">Lehentasuna gutxituta!</string>
     <string name="priorityUpdated">Lehentasuna eguneratuta!</string>
-    <string name="getQBittorrentPrefefrences">Aukerak lortzen...</string>
+    <string name="getQBittorrentPrefefrences">Aukerak lortzen…</string>
     <string name="setQBittorrentPrefefrences">Aukerak gordeta</string>
     <string name="setUploadRateLimit">Igoera neurri muga ezarrita</string>
     <string name="setDownloadRateLimit">Jeisketa neurri muga ezarrita</string>
@@ -105,10 +105,10 @@
     <string name="torrent_details_num_connections">Elkarketa Zenbatekoa:</string>
     <string name="torrent_details_share_ratio">Elkarbanatze Maila:</string>
     <string name="torrent_details_first_last">Lehen eta azken atalak</string>
-    <string name="torrent_priority_menu">Lehentasuna...</string>
+    <string name="torrent_priority_menu">Lehentasuna…</string>
     <string name="torrent_details_seq_download">Jeisketa sekuentziala</string>
     <string name="torrent_details_cant_general_ino">Argibide orokorrak ezin dira berreskuratu</string>
-    <string name="settings_qbittorrent_advanced">Aukera aurreratuak...</string>
+    <string name="settings_qbittorrent_advanced">Aukera aurreratuak…</string>
     <string name="settings_qbittorrent_account_category">Kontuak</string>
     <string name="settings_qbittorrent_currentServer_title">Hautatu qBittorrent zerbitzaria</string>
     <string name="settings_qbittorrent_currentServer_summary">qBittorrent Zerbitzaria</string>
@@ -132,11 +132,11 @@
     <string name="settings_qbittorrent_autorefresh_category">Berez Berritu</string>
     <string name="settings_qbittorrent_autorefresh_title">Berezgaitasunez berritu?</string>
     <string name="settings_qbittorrent_autorefresh_summary">Eguneratu torrent zerrenda</string>
-    <string name="settings_qbittorrent_refresh_period_title">Berritze epea...</string>
+    <string name="settings_qbittorrent_refresh_period_title">Berritze epea…</string>
     <string name="settings_qbittorrent_notifications_category">Jakinarazpenak</string>
     <string name="settings_qbittorrent_notifications_summary">Barreneko egiaztapena</string>
-    <string name="settings_qbittorrent_notifications_period_title">Torrent egiaztatze epea...</string>
-    <string name="settings_qbittorrent_notifications_period_summary">Egiaztatze epea...</string>
+    <string name="settings_qbittorrent_notifications_period_title">Torrent egiaztatze epea…</string>
+    <string name="settings_qbittorrent_notifications_period_summary">Egiaztatze epea…</string>
     <string name="settings_qbittorrent_timeouts_category">Epemugak</string>
     <string name="settings_qbittorrent_connection_timeout_title">Elkarketa epemuga</string>
     <string name="settings_qbittorrent_connection_timeout_summary">Epemuga segunduetan elkarketa ezarri arte</string>
@@ -144,8 +144,8 @@
     <string name="settings_qbittorrent_data_timeout_title">Datu epemuga</string>
     <string name="settings_qbittorrent_data_timeout_summary">Epemuga segundutan datuak itxaroteko</string>
     <string name="settings_qbittorrent_data_timeout_dialog_title">Datu epemuga segundutan?</string>
-    <string name="settings_qbittorrent_sortby_summary">Antolatu honela...</string>
-    <string name="settings_qbittorrent_sortby_dialog_title">Antolatu honela...</string>
+    <string name="settings_qbittorrent_sortby_summary">Antolatu honela…</string>
+    <string name="settings_qbittorrent_sortby_dialog_title">Antolatu honela…</string>
     <string name="settings_qbittorrent_reverse_order_summary">Alderantzizko hurrenkera</string>
     <string name="settings_qbittorrent_reverse_order_dialog_title">Alderantzizko hurrenkera?</string>
     <string name="settings_qbittorrent_appearance_category">Itxura</string>
@@ -176,7 +176,7 @@
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">Gehienezko torrent ekinean</string>
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">Gehienezko torrent ekinean?</string>
     <string name="search_title">Bilatu</string>
-    <string name="search_hint">Bilatu...</string>
+    <string name="search_hint">Bilatu…</string>
     <string name="dialog_add_url">Gehitu URL-a hemen</string>
     <string name="dialog_download_rate_limit">Jeisketa neurri muga (KiB/s)</string>
     <string name="dialog_upload_rate_limit">Igoera neurri muga (KiB/s)</string>
@@ -254,15 +254,15 @@
     </string>
     <string name="sortby_menu_completed_on">Osatua</string>
     <string name="sortby_menu_added_on">Gehituta</string>
-    <string name="sortby_menu_date">Data...</string>
-    <string name="sortby_menu_speed">Abiadura...</string>
+    <string name="sortby_menu_date">Data…</string>
+    <string name="sortby_menu_speed">Abiadura…</string>
     <string name="torrent_details_addedon">Gehituta:</string>
     <string name="torrent_details_completedon">Osatuta:</string>
     <string name="drawer_category_categories">Kategoriak</string>
     <string name="drawer_category_all">Guztiak></string>
     <string name="drawer_category_uncategorized">Kategoriarik ez</string>
     <string name="torrent_details_category">Kategoria:</string>
-    <string name="torrent_category_menu">Kategoria...</string>
+    <string name="torrent_category_menu">Kategoria…</string>
     <string name="torrentsApplyingChange">Aldaketa ezartzen!</string>
     <string name="action_delete_category">Ezabatu kategoria</string>
     <string name="action_set_category">Ezarri kategoria</string>
@@ -272,5 +272,5 @@
     <string name="action_add_url">Gehitu torrent esteka</string>
     <string name="pathAndLabelDialogText">Ez da elkarrizketa hau berriro erakutsi</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Gorde bidea eta etiketa elkarrizketa-</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Gaitu gorde bidea eta kategoria elkarrizketa-koadroa</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Gaitu gorde bidea eta kategoria elkarrizketa-koadroa</string>
 </resources>

@@ -8,8 +8,6 @@
  */
 package com.lgallardo.qbittorrentclient;
 
-import android.util.Log;
-
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import java.io.IOException;

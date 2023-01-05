@@ -276,5 +276,5 @@
     <string name="action_add_file">Aggiungere torrent name</string>
     <string name="pathAndLabelDialogText">Non mostrare più questa finestra</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Salva percorso ed categoria della finestra di dialogo</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Abilita salvataggio del percorso e della finestra</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Abilita salvataggio del percorso e della finestra</string>
 </resources>

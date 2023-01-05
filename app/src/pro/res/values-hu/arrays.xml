@@ -62,6 +62,7 @@
         <item>Előrehaladás</item>
         <item>Arány</item>
         <item>Letöltési sebesség</item>
+        <item>Feltöltési sebesség</item>
         <item>Hozzáadva</item>
         <item>Elkészült</item>
     </string-array>
@@ -87,7 +88,6 @@
         <item>Inaktív</item>
         <item>Lehetőségek</item>
         <item>Beállítások</item>
-        <item>Pro beszerzése</item>
         <item>Súgó</item>
     </string-array>
     <string-array name="scheduler_days">

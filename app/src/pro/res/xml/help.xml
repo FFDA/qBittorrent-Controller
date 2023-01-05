@@ -6,39 +6,41 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory
-        android:key="help"
-        android:title="@string/help_category">
-        <Preference
-            android:summary="@string/help_documentation_summary"
-            android:title="@string/help_documentation_title">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/lgallard/qBittorrent-Client/wiki" />
-        </Preference>
-        <Preference
-            android:summary="@string/help_report_summary"
-            android:title="@string/help_report_title"
-            android:key="report">
-        </Preference>
-        <Preference
-            android:key="version"
-            android:title="@string/help_version_title"></Preference>
-
-        <Preference
-            android:summary="@string/help_rate_summary"
-            android:title="@string/help_rate_title">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro" />
-        </Preference>
-
-        <Preference
-            android:summary="@string/app_name"
-            android:title="@string/help_about_title">
-            <intent android:action="com.lgallardo.qbittorrentclientpro.AboutActivity" />
-        </Preference>
-    </PreferenceCategory>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:summary="@string/help_documentation_summary"
+        android:title="@string/help_documentation_title"
+        app:allowDividerBelow="true">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/lgallard/qBittorrent-Client/wiki" />
+    </Preference>
+    <Preference
+        android:summary="@string/help_report_summary"
+        android:title="@string/help_report_title"
+        android:key="report"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true"/>
+    <Preference
+        android:key="version"
+        android:title="@string/help_version_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true"/>
+    <Preference
+        android:summary="@string/help_rate_summary"
+        android:title="@string/help_rate_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro" />
+    </Preference>
+    <Preference
+        android:summary="@string/app_name"
+        android:title="@string/help_about_title"
+        app:allowDividerAbove="true">
+        <intent android:action="com.lgallardo.qbittorrentclientpro.AboutActivity" />
+    </Preference>
 </PreferenceScreen>

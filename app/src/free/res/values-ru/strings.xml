@@ -276,5 +276,5 @@
   <string name="action_add_file">Добавить торрент-файл</string>
   <string name="pathAndLabelDialogText">Больше не показывать этот диалог</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Диалог Сохранить путь и категорию</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Включить диалог сохранения пути и категории</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Включить диалог сохранения пути и категории</string>
 </resources>

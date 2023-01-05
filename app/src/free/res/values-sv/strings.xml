@@ -275,6 +275,6 @@
     <string name="action_add_file">Lägg torrent fil</string>
     <string name="action_add_url">Lägga torrent länk</string>
     <string name="pathAndLabelDialogText">Visar inte den här dialogrutan igen</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Aktivera spara väg och kategori dialog</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Aktivera spara väg och kategori dialog</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Spara bana och kategori dialog</string>
 </resources>

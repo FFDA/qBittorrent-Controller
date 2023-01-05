@@ -267,5 +267,5 @@
   <string name="action_add_url">Torrent リンクを追加</string>
   <string name="pathAndLabelDialogText">今後このダイアログを表示しない</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">保存パスとラベルのダイアログ</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">保存パスとラベルのダイアログを有効にします</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">保存パスとラベルのダイアログを有効にします</string>
 </resources>

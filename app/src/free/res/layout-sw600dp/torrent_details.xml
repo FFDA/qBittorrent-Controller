@@ -6,7 +6,7 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.core.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/details_refresh_layout"
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
     android:descendantFocusability="blocksDescendants">
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -396,12 +396,12 @@
                 android:layout_marginRight="10dp" android:background="?dropShadowBackground"
                 android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView android:id="@+id/RecyclerViewContentFiles"
+                <androidx.appcompat.widget.RecyclerView android:id="@+id/RecyclerViewContentFiles"
 
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.appcompat.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -416,12 +416,12 @@
                 android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                 android:background="?dropShadowBackground" android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView android:id="@+id/RecyclerViewTrackers"
+                <androidx.appcompat.widget.RecyclerView android:id="@+id/RecyclerViewTrackers"
 
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.appcompat.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -436,13 +436,13 @@
                 android:layout_marginRight="10dp" android:background="?dropShadowBackground"
                 android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView android:id="@+id/RecyclerViewGeneralInfo"
+                <androidx.appcompat.widget.RecyclerView android:id="@+id/RecyclerViewGeneralInfo"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.appcompat.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -455,6 +455,6 @@
                 android:visibility="invisible"/>
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.core.widget.SwipeRefreshLayout>

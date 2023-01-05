@@ -6,8 +6,8 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rss_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,22 +22,11 @@
             android:id="@+id/app_bar"
             layout="@layout/app_bar" />
 
-
         <ListView
             android:id="@+id/channel_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_bar"
-            android:background="?backgroundSelector">
-
-        </ListView>
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adViewRssFeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-1035265933040074/6449288097" />
+            android:background="?backgroundSelector"/>
     </RelativeLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

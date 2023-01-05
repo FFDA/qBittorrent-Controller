@@ -9,12 +9,15 @@
 package com.lgallardo.qbittorrentclient;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
-import android.app.ListFragment;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.fragment.app.ListFragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+//import androidx.recyclerview.widget.RecyclerView;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,10 +32,10 @@ import android.widget.ListView;
 public class ItemstFragment extends ListFragment {
 
     static public ActionMode mActionMode;
-    public int nr = 0;
+//    public int nr = 0;
     int secondContainer;
     TorrentDetailsFragment detailsFragment;
-    private RecyclerView recyclerView;
+//    private RecyclerView recyclerView;
     private RefreshListener refreshListener;
     public static View.OnClickListener originalListener;
 
@@ -54,7 +57,7 @@ public class ItemstFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreateView(inflater, container, savedInstanceState);
 
@@ -70,7 +73,7 @@ public class ItemstFragment extends ListFragment {
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.activity_main_swipe_refresh_layout);
 
-        mSwipeRefreshLayout.setColorSchemeColors(R.color.primary, R.color.primary_dark, R.color.primary_text);
+        mSwipeRefreshLayout.setColorSchemeColors(getContext().getColor(R.color.primary), getContext().getColor(R.color.primary_dark), getContext().getColor(R.color.primary_text));
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,12 +86,12 @@ public class ItemstFragment extends ListFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         try {
@@ -176,125 +179,66 @@ public class ItemstFragment extends ListFragment {
 
                     ((MainActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-                    switch (item.getItemId()) {
+//                    switch (item.getItemId()) {
+                    if (item.getItemId() == R.id.action_pause) {
+                        m.pauseSelectedTorrents(hashes);
 
-                        case R.id.action_pause:
-                            m.pauseSelectedTorrents(hashes);
+                        // Clear selection
+                        nr = 0;
 
-                            // Clear selection
-                            nr = 0;
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        return true;
+                    } else if (item.getItemId() == R.id.action_resume) {
 
-                            return true;
+//                        case R.id.action_resume:
 
+                        m.startSelectedTorrents(hashes);
 
-                        case R.id.action_resume:
+                        // Clear selection
+                        nr = 0;
 
-                            m.startSelectedTorrents(hashes);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            // Clear selection
-                            nr = 0;
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        return true;
+                    } else if (item.getItemId() == R.id.action_delete) {
+//                        case R.id.action_delete:
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        if (!getActivity().isFinishing()) {
+                            builder = new AlertDialog.Builder(getActivity());
 
-                            return true;
+                            // Message
+                            builder.setMessage(R.string.dm_deleteSelectedTorrents).setTitle(R.string.dt_deleteSelectedTorrents);
 
-                        case R.id.action_delete:
+                            // Cancel
+                            builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User canceled the dialog
+                                }
+                            });
 
-                            if (!getActivity().isFinishing()) {
-                                builder = new AlertDialog.Builder(getActivity());
+                            // Ok
+                            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User accepted the dialog
+                                    m.deleteSelectedTorrents(hashesStr);
 
-                                // Message
-                                builder.setMessage(R.string.dm_deleteSelectedTorrents).setTitle(R.string.dt_deleteSelectedTorrents);
+                                }
+                            });
 
-                                // Cancel
-                                builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // User canceled the dialog
-                                    }
-                                });
+                            // Create dialog
+                            dialog = builder.create();
 
-                                // Ok
-                                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // User accepted the dialog
-                                        m.deleteSelectedTorrents(hashesStr);
-
-                                    }
-                                });
-
-                                // Create dialog
-                                dialog = builder.create();
-
-                                // Show dialog
-                                dialog.show();
-
-                                // Clear selection
-                                nr = 0;
-
-                                // Enable SwipeRefresh
-                                mSwipeRefreshLayout.setEnabled(true);
-
-                                mAdapter.clearSelection();
-                                mode.finish();
-
-                            }
-
-                            return true;
-                        case R.id.action_delete_drive:
-
-                            if (!getActivity().isFinishing()) {
-                                builder = new AlertDialog.Builder(getActivity());
-
-                                // Message
-                                builder.setMessage(R.string.dm_deleteDriveSelectedTorrents).setTitle(R.string.dt_deleteDriveSelectedTorrents);
-
-                                // Cancel
-                                builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // User canceled the dialog
-                                    }
-                                });
-
-                                // Ok
-                                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // User accepted the dialog
-                                        m.deleteDriveSelectedTorrents(hashesStr);
-
-                                    }
-                                });
-
-                                // Create dialog
-                                dialog = builder.create();
-
-                                // Show dialog
-                                dialog.show();
-
-                                // Clear selection
-                                nr = 0;
-
-                                // Enable SwipeRefresh
-                                mSwipeRefreshLayout.setEnabled(true);
-
-                                mAdapter.clearSelection();
-                                mode.finish();
-
-                            }
-
-                            return true;
-                        case R.id.action_force_start:
-
-                            m.forceStartSelectedTorrents(hashes);
+                            // Show dialog
+                            dialog.show();
 
                             // Clear selection
                             nr = 0;
@@ -305,9 +249,39 @@ public class ItemstFragment extends ListFragment {
                             mAdapter.clearSelection();
                             mode.finish();
 
-                            return true;
-                        case R.id.action_increase_prio:
-                            m.increasePrioTorrent(hashes);
+                        }
+
+                        return true;
+                    } else if (item.getItemId() == R.id.action_delete_drive) {
+//                        case R.id.action_delete_drive:
+
+                        if (!getActivity().isFinishing()) {
+                            builder = new AlertDialog.Builder(getActivity());
+
+                            // Message
+                            builder.setMessage(R.string.dm_deleteDriveSelectedTorrents).setTitle(R.string.dt_deleteDriveSelectedTorrents);
+
+                            // Cancel
+                            builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User canceled the dialog
+                                }
+                            });
+
+                            // Ok
+                            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User accepted the dialog
+                                    m.deleteDriveSelectedTorrents(hashesStr);
+
+                                }
+                            });
+
+                            // Create dialog
+                            dialog = builder.create();
+
+                            // Show dialog
+                            dialog.show();
 
                             // Clear selection
                             nr = 0;
@@ -318,151 +292,187 @@ public class ItemstFragment extends ListFragment {
                             mAdapter.clearSelection();
                             mode.finish();
 
-                            return true;
+                        }
 
-                        case R.id.action_decrease_prio:
-                            m.decreasePrioTorrent(hashes);
+                        return true;
+                    } else if (item.getItemId() == R.id.action_force_start) {
+//                        case R.id.action_force_start:
 
-                            // Clear selection
-                            nr = 0;
+                        m.forceStartSelectedTorrents(hashes);
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Clear selection
+                        nr = 0;
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            return true;
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                        case R.id.action_max_prio:
-                            m.maxPrioTorrent(hashes);
+                        return true;
+                    } else if (item.getItemId() == R.id.action_increase_prio) {
+//                        case R.id.action_increase_prio:
+                        m.increasePrioTorrent(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
+                        return true;
+                    } else if (item.getItemId() == R.id.action_decrease_prio) {
+//                        case R.id.action_decrease_prio:
+                        m.decreasePrioTorrent(hashes);
 
-                        case R.id.action_min_prio:
-                            m.minPrioTorrent(hashes);
+                        // Clear selection
+                        nr = 0;
 
-                            // Clear selection
-                            nr = 0;
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        return true;
+                    } else if (item.getItemId() == R.id.action_max_prio) {
+//                        case R.id.action_max_prio:
+                        m.maxPrioTorrent(hashes);
 
-                            return true;
+                        // Clear selection
+                        nr = 0;
 
-                        case R.id.action_upload_rate_limit:
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            m.uploadRateLimitDialog(hashes);
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            // Clear selection
-                            nr = 0;
+                        return true;
+                    } else if (item.getItemId() == R.id.action_min_prio) {
+//                        case R.id.action_min_prio:
+                        m.minPrioTorrent(hashes);
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Clear selection
+                        nr = 0;
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            return true;
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                        case R.id.action_download_rate_limit:
+                        return true;
+                    } else if (item.getItemId() == R.id.action_upload_rate_limit) {
+//                        case R.id.action_upload_rate_limit:
 
-                            m.downloadRateLimitDialog(hashes);
+                        m.uploadRateLimitDialog(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
-                        case R.id.action_recheck:
+                        return true;
+                    } else if (item.getItemId() == R.id.action_download_rate_limit) {
+//                        case R.id.action_download_rate_limit:
 
-                            m.recheckTorrents(hashes);
+                        m.downloadRateLimitDialog(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
-                        case R.id.action_sequential_download:
+                        return true;
+                    } else if (item.getItemId() == R.id.action_recheck) {
+//                        case R.id.action_recheck:
 
-                            m.toggleSequentialDownload(hashes);
+                        m.recheckTorrents(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
-                        case R.id.action_first_last_piece_prio:
+                        return true;
+                    } else if (item.getItemId() == R.id.action_sequential_download) {
+//                        case R.id.action_sequential_download:
 
-                            m.toggleFirstLastPiecePrio(hashes);
+                        m.toggleSequentialDownload(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
-                        case R.id.action_set_category:
+                        return true;
+                    } else if (item.getItemId() == R.id.action_first_last_piece_prio) {
+//                        case R.id.action_first_last_piece_prio:
 
-                            m.setCategoryDialog(hashes);
+                        m.toggleFirstLastPiecePrio(hashes);
 
-                            // Clear selection
-                            nr = 0;
+                        // Clear selection
+                        nr = 0;
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            return true;
+                        return true;
+                    } else if (item.getItemId() == R.id.action_set_category) {
+//                        case R.id.action_set_category:
 
-                        case R.id.action_delete_category:
+                        m.setCategoryDialog(hashes);
 
-                            m.setCategory(hashes, " ");
+                        // Clear selection
+                        nr = 0;
 
-                            // Clear selection
-                            nr = 0;
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
 
-                            // Enable SwipeRefresh
-                            mSwipeRefreshLayout.setEnabled(true);
+                        mAdapter.clearSelection();
+                        mode.finish();
 
-                            mAdapter.clearSelection();
-                            mode.finish();
+                        return true;
+                    } else if (item.getItemId() == R.id.action_delete_category) {
+//                        case R.id.action_delete_category:
 
-                            return true;
-                        default:
+                        m.setCategory(hashes, " ");
+
+                        // Clear selection
+                        nr = 0;
+
+                        // Enable SwipeRefresh
+                        mSwipeRefreshLayout.setEnabled(true);
+
+                        mAdapter.clearSelection();
+                        mode.finish();
+
+                        return true;
+                    } else {
+//                        default:
                             // Enable SwipeRefresh
                             mSwipeRefreshLayout.setEnabled(true);
                             return true;
@@ -501,7 +511,7 @@ public class ItemstFragment extends ListFragment {
     }
 
     @Override
-    public void onListItemClick(ListView parent, View v, int position, long id) {
+    public void onListItemClick(@NonNull ListView parent, @NonNull View v, int position, long id) {
         if(!MainActivity.listViewRefreshing) {
             ListItemClicked(position);
         }
@@ -509,9 +519,9 @@ public class ItemstFragment extends ListFragment {
 
     public void ListItemClicked(int position) {
 
-        ListView lv = this.getListView();
+//        ListView lv = this.getListView();
 
-        int count = lv.getCount();
+//        int count = lv.getCount();
 
         Torrent torrent = MainActivity.lines[position];
 
@@ -519,7 +529,7 @@ public class ItemstFragment extends ListFragment {
 
             // Update torrent details
 
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getParentFragmentManager();
             if(!(fragmentManager.findFragmentByTag("secondFragment") instanceof AboutFragment)) {
 
                 detailsFragment = (TorrentDetailsFragment) fragmentManager.findFragmentByTag("secondFragment");
@@ -549,10 +559,13 @@ public class ItemstFragment extends ListFragment {
         detailsFragment.setPosition(position);
 
         if (detailsFragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getParentFragmentManager();
 
             if (getActivity().findViewById(R.id.one_frame) != null) {
-                fragmentManager.beginTransaction().replace(this.getSecondFragmentContainer(), detailsFragment, "firstFragment").addToBackStack("secondFragment").commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.one_frame, detailsFragment, "firstFragment")
+                        .addToBackStack("secondFragment")
+                        .commit();
 
                 // Change toolbar home button behaviour
                 originalListener = MainActivity.drawerToggle.getToolbarNavigationClickListener();
@@ -586,7 +599,7 @@ public class ItemstFragment extends ListFragment {
 
                         }
 
-                        FragmentManager fm = getFragmentManager();
+                        FragmentManager fm = getParentFragmentManager();
 
                         fm.popBackStack();
 
@@ -594,14 +607,17 @@ public class ItemstFragment extends ListFragment {
                     }
                 });
             } else {
-                fragmentManager.beginTransaction().replace(this.getSecondFragmentContainer(), detailsFragment, "secondFragment").addToBackStack("secondFragment").commit();
+                fragmentManager.beginTransaction()
+                        .replace(this.getSecondFragmentContainer(), detailsFragment, "secondFragment")
+                        .addToBackStack("secondFragment")
+                        .commit();
             }
         }
 
     }
 
     // @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         // inflater.inflate(R.menu.main, menu);
         // super.onCreateOptionsMenu(menu, inflater);
 

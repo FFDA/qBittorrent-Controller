@@ -52,7 +52,7 @@
   <string name="increasePrioTorrent">優先度を上げました!</string>
   <string name="decreasePrioTorrent">優先度を下げました!</string>
   <string name="priorityUpdated">優先度を更新しました!</string>
-  <string name="getQBittorrentPrefefrences">オプションを取得中...</string>
+  <string name="getQBittorrentPrefefrences">オプションを取得中…</string>
   <string name="setQBittorrentPrefefrences">オプションを保存しました</string>
   <string name="setUploadRateLimit">アップロード レート限度を設定しました</string>
   <string name="setDownloadRateLimit">ダウンロード レート限度を設定しました</string>
@@ -97,10 +97,10 @@
   <string name="torrent_details_num_connections">接続数</string>
   <string name="torrent_details_share_ratio">共有レシオ:</string>
   <string name="torrent_details_first_last">最初と最後のピース</string>
-  <string name="torrent_priority_menu">優先度...</string>
+  <string name="torrent_priority_menu">優先度…</string>
   <string name="torrent_details_seq_download">順次ダウンロード</string>
   <string name="torrent_details_cant_general_ino">全般情報が取得できません</string>
-  <string name="settings_qbittorrent_advanced">詳細...</string>
+  <string name="settings_qbittorrent_advanced">詳細…</string>
   <string name="settings_qbittorrent_account_category">アカウント</string>
   <string name="settings_qbittorrent_currentServer_title">qBittorrent サーバーを選択</string>
   <string name="settings_qbittorrent_currentServer_summary">qBittorrent サーバー</string>
@@ -124,11 +124,11 @@
   <string name="settings_qbittorrent_autorefresh_category">自動リフレッシュ</string>
   <string name="settings_qbittorrent_autorefresh_title">自動的にリフレッシュしますか?</string>
   <string name="settings_qbittorrent_autorefresh_summary">Torrent リストを更新</string>
-  <string name="settings_qbittorrent_refresh_period_title">リフレッシュ間隔...</string>
+  <string name="settings_qbittorrent_refresh_period_title">リフレッシュ間隔…</string>
   <string name="settings_qbittorrent_notifications_category">通知</string>
   <string name="settings_qbittorrent_notifications_summary">バックグラウンドでチェック</string>
-  <string name="settings_qbittorrent_notifications_period_title">Torrent をチェックする間隔...</string>
-  <string name="settings_qbittorrent_notifications_period_summary">チェック間隔...</string>
+  <string name="settings_qbittorrent_notifications_period_title">Torrent をチェックする間隔…</string>
+  <string name="settings_qbittorrent_notifications_period_summary">チェック間隔…</string>
   <string name="settings_qbittorrent_timeouts_category">タイムアウト</string>
   <string name="settings_qbittorrent_connection_timeout_title">接続タイムアウト</string>
   <string name="settings_qbittorrent_connection_timeout_summary">接続が確立されるまでの、秒単位のタイムアウト</string>
@@ -136,8 +136,8 @@
   <string name="settings_qbittorrent_data_timeout_title">データ タイムアウト</string>
   <string name="settings_qbittorrent_data_timeout_summary">データを待機する、秒単位のタイムアウト</string>
   <string name="settings_qbittorrent_data_timeout_dialog_title">秒単位のデータ タイムアウト?</string>
-  <string name="settings_qbittorrent_sortby_summary">並び順...</string>
-  <string name="settings_qbittorrent_sortby_dialog_title">並び順...</string>
+  <string name="settings_qbittorrent_sortby_summary">並び順…</string>
+  <string name="settings_qbittorrent_sortby_dialog_title">並び順…</string>
   <string name="settings_qbittorrent_reverse_order_summary">逆順</string>
   <string name="settings_qbittorrent_reverse_order_dialog_title">逆順?</string>
   <string name="settings_qbittorrent_appearance_category">外観</string>
@@ -168,7 +168,7 @@
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">最大アクティブ Torrent 数</string>
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">最大アクティブ Torrent 数?</string>
   <string name="search_title">検索</string>
-  <string name="search_hint">検索...</string>
+  <string name="search_hint">検索…</string>
   <string name="dialog_add_url">ここに URL を追加</string>
   <string name="dialog_download_rate_limit">ダウンロード レート限度 (KiB/s)</string>
   <string name="dialog_upload_rate_limit">アップロード レート限度 (KiB/s)</string>
@@ -184,10 +184,10 @@
   <string name="sortby_menu_priority">優先度</string>
   <string name="sortby_menu_progress">進捗</string>
   <string name="sortby_menu_ratio">レシオ</string>
-  <string name="sortby_menu_speed">速度...</string>
+  <string name="sortby_menu_speed">速度…</string>
   <string name="sortby_menu_download_speed">ダウンロード速度</string>
   <string name="sortby_menu_upload_speed">アップロード速度</string>
-  <string name="sortby_menu_date">日付...</string>
+  <string name="sortby_menu_date">日付…</string>
   <string name="sortby_menu_added_on">追加</string>
   <string name="sortby_menu_completed_on">完了</string>
   <string name="settings_qbittorrent_notifications_title">通知を有効にする</string>
@@ -253,12 +253,12 @@
   <string name="action_set_category">カテゴリーを設定する</string>
   <string name="action_delete_category">カテゴリーを削除</string>
   <string name="torrentsApplyingChange">変更を適用中!</string>
-  <string name="torrent_category_menu">カテゴリー...</string>
+  <string name="torrent_category_menu">カテゴリー…</string>
   <string name="action_add_tracker">トラッカーを追加</string>
   <string name="help_libraries">使用ソフトウェア:</string>
   <string name="action_add_file">Torrent ファイルを追加</string>
   <string name="action_add_url">Torrent リンクを追加</string>
   <string name="pathAndLabelDialogText">今後このダイアログを表示しない</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">保存パスとラベルのダイアログ</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">保存パスとラベルのダイアログを有効にします</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">保存パスとラベルのダイアログを有効にします</string>
 </resources>

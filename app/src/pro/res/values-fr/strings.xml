@@ -52,7 +52,7 @@
   <string name="increasePrioTorrent">Priorité augmentée!</string>
   <string name="decreasePrioTorrent">Priorité réduite!</string>
   <string name="priorityUpdated">Priorité mise à jour!</string>
-  <string name="getQBittorrentPrefefrences">Obtenir les options...</string>
+  <string name="getQBittorrentPrefefrences">Obtenir les options…</string>
   <string name="setQBittorrentPrefefrences">Options sauvegardées</string>
   <string name="setUploadRateLimit">Limitation du ratio d\'envoi</string>
   <string name="setDownloadRateLimit">Limitation du ratio de téléchargement</string>
@@ -97,10 +97,10 @@
   <string name="torrent_details_num_connections">Nom. Connexion:</string>
   <string name="torrent_details_share_ratio">Ratio partage:</string>
   <string name="torrent_details_first_last">Pièces Premières et dernières</string>
-  <string name="torrent_priority_menu">Priorité...</string>
+  <string name="torrent_priority_menu">Priorité…</string>
   <string name="torrent_details_seq_download">Téléchargement séquentielle</string>
   <string name="torrent_details_cant_general_ino">L\'Info générale ne peut pas être récupéré</string>
-  <string name="settings_qbittorrent_advanced">Options avancées...</string>
+  <string name="settings_qbittorrent_advanced">Options avancées…</string>
   <string name="settings_qbittorrent_account_category">Comptes</string>
   <string name="settings_qbittorrent_currentServer_title">Choisissez un serveur qBittorrent</string>
   <string name="settings_qbittorrent_currentServer_summary">Serveur qBittorrent</string>
@@ -124,11 +124,11 @@
   <string name="settings_qbittorrent_autorefresh_category">Actualisation Automatique</string>
   <string name="settings_qbittorrent_autorefresh_title">Actualiser automatiquement?</string>
   <string name="settings_qbittorrent_autorefresh_summary">Mettre à jour la liste des torrents</string>
-  <string name="settings_qbittorrent_refresh_period_title">Actualiser toutes...</string>
+  <string name="settings_qbittorrent_refresh_period_title">Actualiser toutes…</string>
   <string name="settings_qbittorrent_notifications_category">Notifications+</string>
   <string name="settings_qbittorrent_notifications_summary">Vérification de fond</string>
-  <string name="settings_qbittorrent_notifications_period_title">Vérifiez torrents toutes...</string>
-  <string name="settings_qbittorrent_notifications_period_summary">Vérifiez tous...</string>
+  <string name="settings_qbittorrent_notifications_period_title">Vérifiez torrents toutes…</string>
+  <string name="settings_qbittorrent_notifications_period_summary">Vérifiez tous…</string>
   <string name="settings_qbittorrent_timeouts_category">Délais d\'attente</string>
   <string name="settings_qbittorrent_connection_timeout_title">Délai de connexion</string>
   <string name="settings_qbittorrent_connection_timeout_summary">Délai en secondes jusqu\'à ce que la connexion est établie</string>
@@ -136,8 +136,8 @@
   <string name="settings_qbittorrent_data_timeout_title">Délai d\'attente de données</string>
   <string name="settings_qbittorrent_data_timeout_summary">Délai d\'attente en secondes pour les données</string>
   <string name="settings_qbittorrent_data_timeout_dialog_title">Délai d\'attente de données en secondes?</string>
-  <string name="settings_qbittorrent_sortby_summary">Trier par...</string>
-  <string name="settings_qbittorrent_sortby_dialog_title">Trier par...</string>
+  <string name="settings_qbittorrent_sortby_summary">Trier par…</string>
+  <string name="settings_qbittorrent_sortby_dialog_title">Trier par…</string>
   <string name="settings_qbittorrent_reverse_order_summary">Ordre inversé</string>
   <string name="settings_qbittorrent_reverse_order_dialog_title">Ordre Oinversé?</string>
   <string name="settings_qbittorrent_appearance_category">Apparence</string>
@@ -168,7 +168,7 @@
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">Maximum de torrents actifs</string>
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">Maximum de torrents actifs?</string>
   <string name="search_title">Rechercher</string>
-  <string name="search_hint">Rechercher...</string>
+  <string name="search_hint">Rechercher…</string>
   <string name="dialog_add_url">Ajouter URL ici.</string>
   <string name="dialog_download_rate_limit">Limite de vitesse de téléchargement (KiB/s)</string>
   <string name="dialog_upload_rate_limit">Limite de vitesse de charge (KiB/s)</string>
@@ -184,10 +184,10 @@
   <string name="sortby_menu_priority">Priorité</string>
   <string name="sortby_menu_progress">Progrès</string>
   <string name="sortby_menu_ratio">Ratio</string>
-  <string name="sortby_menu_speed">Vitesse...</string>
+  <string name="sortby_menu_speed">Vitesse…</string>
   <string name="sortby_menu_download_speed">Vitesse DL</string>
   <string name="sortby_menu_upload_speed">Vitesse UP</string>
-  <string name="sortby_menu_date">Date...</string>
+  <string name="sortby_menu_date">Date…</string>
   <string name="sortby_menu_added_on">Ajouté le</string>
   <string name="sortby_menu_completed_on">Complété le</string>
   <string name="settings_qbittorrent_notifications_title">Activer les notifications</string>
@@ -253,12 +253,12 @@
   <string name="action_set_category">Définir l\'catégorie</string>
   <string name="action_delete_category">Supprimer l\'catégorie</string>
   <string name="torrentsApplyingChange">Appliquer le changement!</string>
-  <string name="torrent_category_menu">Catégorie...</string>
+  <string name="torrent_category_menu">Catégorie…</string>
   <string name="action_add_tracker">Ajouter tracker</string>
   <string name="help_libraries">Les logiciels utilisés:</string>
   <string name="action_add_file">Ajouter fichier torrent</string>
   <string name="action_add_url">Ajouter un lien torrent</string>
   <string name="pathAndLabelDialogText">Ne plus afficher ce message</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Message du chemin de sauvegarde et de l\'étiquette</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Activer le message du chemin de sauvegarde et de l\'étiquette</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Activer le message du chemin de sauvegarde et de l\'étiquette</string>
 </resources>

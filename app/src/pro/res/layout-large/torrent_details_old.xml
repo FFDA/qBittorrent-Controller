@@ -7,15 +7,15 @@
   ~
   -->
 
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:id="@+id/details_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,8 +29,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
@@ -81,7 +81,7 @@
                         android:id="@+id/percentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:text="0%"
                         android:textSize="25sp" />
                 </LinearLayout>
@@ -110,7 +110,7 @@
                         android:id="@+id/torrentEta"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:layout_weight="1"
                         android:text="HH:MM:SS"
                         android:textSize="15sp" />
@@ -119,7 +119,7 @@
                         android:id="@+id/torrentDownloadSpeed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:layout_weight="1"
                         android:text="0 KiB/s"
                         android:textSize="15sp" />
@@ -128,7 +128,7 @@
                         android:id="@+id/torrentUploadSpeed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:layout_weight="1"
                         android:text="0 KiB/s"
                         android:textSize="15sp" />
@@ -180,7 +180,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:background="@android:color/darker_gray" />
 
                     <TextView
@@ -222,7 +222,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:background="@android:color/darker_gray" />
 
                     <TextView
@@ -327,7 +327,7 @@
                 android:background="?dropShadowBackground"
                 android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewContentFiles"
 
                     android:layout_width="match_parent"
@@ -335,7 +335,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -358,7 +358,7 @@
                 android:background="?dropShadowBackground"
                 android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewTrackers"
 
                     android:layout_width="match_parent"
@@ -366,7 +366,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -388,7 +388,7 @@
                 android:background="?dropShadowBackground"
                 android:elevation="5dp">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewGeneralInfo"
 
                     android:layout_width="match_parent"
@@ -396,7 +396,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </FrameLayout>
 
@@ -426,6 +426,6 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

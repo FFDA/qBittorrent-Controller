@@ -83,13 +83,13 @@ public class Common {
     }
 
     protected static String unixTimestampToDate(String unixDate) {
-        long dv = Long.valueOf(unixDate) * 1000;// its need to be in milisecond
+        long dv = Long.valueOf(unixDate) * 1000;// its need to be in milliseconds
         Date df = new Date(dv);
         return new SimpleDateFormat("yyyy-MM-dd hh:mm a").format(df);
     }
 
     protected static String unixTimestampToDate(long unixDate) {
-//        long dv = Long.valueOf(unixDate) * 1000;// its need to be in milisecond
+//        long dv = Long.valueOf(unixDate) * 1000;// its need to be in milliseconds
         Date df = new Date(unixDate);
         return new SimpleDateFormat("yyyy-MM-dd hh:mm a").format(df);
     }
@@ -97,7 +97,7 @@ public class Common {
 
     protected static String secondsToEta(long seconds) {
 
-        String secs = "∞";
+        String secs;
         int day = (int) TimeUnit.SECONDS.toDays(seconds);
         long hours = TimeUnit.SECONDS.toHours(seconds) - (day * 24);
         long minute = TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60);

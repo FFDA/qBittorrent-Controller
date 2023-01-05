@@ -6,7 +6,7 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.core.widget.SwipeRefreshLayout
     android:id="@+id/about_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -95,4 +95,4 @@
         </RelativeLayout>
     </ScrollView>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.core.widget.SwipeRefreshLayout>

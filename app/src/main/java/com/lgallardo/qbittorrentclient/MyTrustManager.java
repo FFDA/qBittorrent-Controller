@@ -1,7 +1,5 @@
 package com.lgallardo.qbittorrentclient;
 
-import android.util.Log;
-
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;

@@ -9,13 +9,15 @@
 
 package com.lgallardo.qbittorrentclient;
 
-/**
- * Created by lgallard on 28/08/15.
+/*
+  Created by lgallard on 28/08/15.
  */
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,8 +115,9 @@ public class GeneralInfoRecyclerViewAdapter extends RecyclerView.Adapter<General
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
+    @NonNull
     @Override
-    public GeneralInfoRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GeneralInfoRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 //        Log.d("Debug", "onCreateViewHolder invoked");
 
@@ -135,7 +138,7 @@ public class GeneralInfoRecyclerViewAdapter extends RecyclerView.Adapter<General
     // Tells us item at which position is being constructed to be displayed and the holder id of the holder object tell us
     // which view type is being created 1 for item row
     @Override
-    public void onBindViewHolder(GeneralInfoRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GeneralInfoRecyclerViewAdapter.ViewHolder holder, int position) {
 
         GeneralInfoItem item = items.get(position);
 

@@ -6,6 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
@@ -49,15 +50,11 @@ public class CustomStringRequest extends com.android.volley.toolbox.StringReques
 
         //return super.parseNetworkResponse(response);
 
-        String data = "";
+        String data;
 
-        try {
-            data = new String(response.data, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        data = new String(response.data, StandardCharsets.UTF_8);
 
-        String jsonstring = "";
+        String jsonstring;
 
         jsonstring = "{\"data\": \"" + data + "\",\"headers\":\"" + response.headers.toString() + "\"}";
         return Response.success(jsonstring, HttpHeaderParser.parseCacheHeaders(response));

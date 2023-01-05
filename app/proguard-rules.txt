@@ -7,3 +7,6 @@
 -dontwarn org.apache.http.**
 -dontwarn android.net.http.AndroidHttpClient
 -dontwarn com.google.android.gms.**
+
+-keep public class * extends androidx.preference.Preference
+-keep public class * extends androidx.preference.PreferenceFragmentCompat

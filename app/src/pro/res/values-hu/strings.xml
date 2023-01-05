@@ -260,5 +260,5 @@
   <string name="action_add_url">Hozzáad torrent linkre</string>
   <string name="pathAndLabelDialogText">Ne mutassa újra ezt a párbeszédablakot</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Útvonal és címke mentési párbeszédablak</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Útvonal és címke mentési párbeszédablak engedélyezése</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Útvonal és címke mentési párbeszédablak engedélyezése</string>
 </resources>

@@ -44,7 +44,7 @@
   <string name="drawer_open">Gezinme çekmecesini aç</string>
   <string name="drawer_close">Gezinme çekmecesini kapa</string>
   <string name="drawer_servers_category">Sunucular</string>
-  <string name="getQBittorrentPrefefrences">Ayarlar alınıyor...</string>
+  <string name="getQBittorrentPrefefrences">Ayarlar alınıyor…</string>
   <string name="setQBittorrentPrefefrences">Ayarlar kaydedildi</string>
   <string name="setUploadRateLimit">Gönderme sınırı ayarlandı</string>
   <string name="setDownloadRateLimit">İndirme sınırı ayarlandı</string>
@@ -88,7 +88,7 @@
   <string name="torrent_details_num_connections">Bağlantı Sayısı:</string>
   <string name="torrent_details_share_ratio">Paylaşım Oranı:</string>
   <string name="torrent_details_first_last">İlk ve son parçalar</string>
-  <string name="torrent_priority_menu">Öncelik...</string>
+  <string name="torrent_priority_menu">Öncelik…</string>
   <string name="torrent_details_seq_download">Ardışık indirme</string>
   <string name="settings_qbittorrent_account_category">Hesaplar</string>
   <string name="settings_qbittorrent_currentServer_title">Bir qBittorrent sunucusu seçin</string>
@@ -124,8 +124,8 @@
   <string name="settings_qbittorrent_data_timeout_summary">Veri bekleme süresi için saniye olarak zaman aşımı</string>
   <string name="settings_qbittorrent_data_timeout_dialog_title">Veri zaman aşımı?</string>
   <string name="settings_qbittorrent_sort_category">Torrent listesini sırala</string>
-  <string name="settings_qbittorrent_sortby_summary">...ya göre sırala</string>
-  <string name="settings_qbittorrent_sortby_dialog_title">...ya göre sırala</string>
+  <string name="settings_qbittorrent_sortby_summary">…ya göre sırala</string>
+  <string name="settings_qbittorrent_sortby_dialog_title">…ya göre sırala</string>
   <string name="settings_qbittorrent_reverse_order_summary">Ters sıra</string>
   <string name="settings_qbittorrent_reverse_order_dialog_title">Ters sıra?</string>
   <string name="options_qbittorrent_connections_limits_category">Bağlantı Limiti</string>
@@ -152,7 +152,7 @@
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">Maksimum aktif torrent</string>
   <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">Maksimum aktif torrent?</string>
   <string name="search_title">Ara</string>
-  <string name="search_hint">Ara...</string>
+  <string name="search_hint">Ara…</string>
   <string name="dialog_add_url">Buraya URL ekleyin</string>
   <string name="dialog_download_rate_limit">İndirme oranı limiti (KiB/s)</string>
   <string name="dialog_upload_rate_limit">Gönderme oranı limiti (KiB/s)</string>
@@ -177,10 +177,10 @@
   <string name="sortby_menu_priority">Öncelik</string>
   <string name="sortby_menu_progress">İlerleme</string>
   <string name="sortby_menu_ratio">Oran</string>
-  <string name="sortby_menu_speed">Hız...</string>
+  <string name="sortby_menu_speed">Hız…</string>
   <string name="sortby_menu_download_speed">İndirme hızı</string>
   <string name="sortby_menu_upload_speed">Gönderme hızı</string>
-  <string name="sortby_menu_date">Tarih...</string>
+  <string name="sortby_menu_date">Tarih…</string>
   <string name="sortby_menu_added_on">Eklenme</string>
   <string name="sortby_menu_completed_on">Tamamlanma</string>
   <string name="settings_qbittorrent_notifications_category">Bildirimler</string>
@@ -210,7 +210,7 @@
   <string name="checkbox_notifynew_rss">Yeni torrentlar bildirilsin mi?</string>
   <string name="notifications_rss_available">Yeni torrentlar mevcut</string>
   <string name="error_rss">RSS alınamadı</string>
-  <string name="settings_qbittorrent_advanced">Gelişmiş...</string>
+  <string name="settings_qbittorrent_advanced">Gelişmiş…</string>
   <string name="options_qbittorrent_schedule_alternative_rate_limits">Alternatif oran limitlerini zamanla</string>
   <string name="options_qbittorrent_scheduler_days_title">Ne Zaman:</string>
   <string name="options_qbittorrent_schedule_alt_from">Kimden</string>
@@ -225,9 +225,9 @@
   <string name="settings_qbittorrent_localhostname_dialog_title">Lokal ana makine adı ya da IP</string>
   <string name="settings_qbittorrent_localport_dialog_title">Yerel Port</string>
   <string name="options_qbittorrent_share_ratio_limiting_category">Paylaşım Oranı Sınırlama</string>
-  <string name="options_qbittorrent_share_ratio_limiting_title">Torrentları ...ya kadar seedle</string>
-  <string name="options_qbittorrent_seed_until_title">oranları ...ya erişene kadar</string>
-  <string name="options_qbittorrent_seed_until_dialog">Torrentları oranları ...ya erişene kadar seedle</string>
+  <string name="options_qbittorrent_share_ratio_limiting_title">Torrentları …ya kadar seedle</string>
+  <string name="options_qbittorrent_seed_until_title">oranları …ya erişene kadar</string>
+  <string name="options_qbittorrent_seed_until_dialog">Torrentları oranları …ya erişene kadar seedle</string>
   <string name="options_qbittorrent_then_title">Daha sonra</string>
   <string name="options_qbittorrent_options">Ayarlar</string>
   <string name="options_qbittorrent_connection">Bağlantı</string>
@@ -257,12 +257,12 @@ Android ayarlarından bu izni vermek ister misiniz?</string>
   <string name="action_set_category">Kategori ayarla</string>
   <string name="action_delete_category">Kategori sil</string>
   <string name="torrentsApplyingChange">Değişiklikler uygulanıyor!</string>
-  <string name="torrent_category_menu">Kategori...</string>
+  <string name="torrent_category_menu">Kategori…</string>
   <string name="action_add_tracker">İzleyici ekle</string>
   <string name="help_libraries">Kullanılan yazılım:</string>
   <string name="action_add_url">Sel bağlantı ekleyin</string>
   <string name="action_add_file">Torrent dosyasını ekleyin</string>
   <string name="pathAndLabelDialogText">Bu ileti dizisini tekrar gösterme</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Kaydetme yolunu ve kategori iletişim kutusunu etkinleştir</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Kaydetme yolunu ve kategori iletişim kutusunu etkinleştir</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Yol ve kategori iletişim kutusunu kaydet</string>
 </resources>

@@ -8,9 +8,6 @@
  */
 package com.lgallardo.qbittorrentclient;
 
-import android.util.Log;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;

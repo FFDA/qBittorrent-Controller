@@ -73,7 +73,7 @@ public class DeviceBootReceiver extends BroadcastReceiver {
             alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
             Intent intent = new Intent(context, NotifierService.class);
-            alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
             alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     SystemClock.elapsedRealtime() + 1000 * 60,

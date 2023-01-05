@@ -9,15 +9,15 @@
 
 package com.lgallardo.qbittorrentclient;
 
-/**
- * Created by lgallard on 28/08/15.
+/*
+  Created by lgallard on 28/08/15.
  */
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +56,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
     private static MainActivity mainActivity;
     private static int drawerOffset = 1;
 
-    private Context context;
+    private final Context context;
 
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -255,7 +255,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
 
                     }
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
 
@@ -268,7 +268,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("all", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Refresh Downloading
@@ -280,7 +280,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("downloading", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Refresh Completed
@@ -292,7 +292,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("completed", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
 
@@ -305,7 +305,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("seeding", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
                 // Refresh Pause
                 if (drawerItem.getAction().equals("refreshPaused")) {
@@ -316,7 +316,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("pause", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
 
@@ -329,7 +329,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("active", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
 
@@ -342,7 +342,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.refreshFromDrawerAction("inactive", drawerItem.name);
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Open Settings
@@ -353,7 +353,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.openSettings();
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
 
@@ -367,7 +367,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     //mainActivity.getAndOpenOptions();
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Get Pro
@@ -378,7 +378,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.getPRO();
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Open Help
@@ -390,7 +390,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                     mainActivity.openHelp();
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
                 }
 
                 // Clicked on categories
@@ -438,12 +438,12 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
 
 //                    Log.d("Debug", "[DrawerItemRecyclerViewAdapter] category: " + drawerItem.name);
 
-                    mainActivity.setSelectionAndTitle(mainActivity.currentState);
+                    mainActivity.setSelectionAndTitle(MainActivity.currentState);
 
                     mainActivity.refreshCurrent();
 
                     // Close drawer
-                    mainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
+                    MainActivity.drawerLayout.closeDrawer(mainActivity.mRecyclerView);
 
 
                 }
@@ -458,10 +458,6 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
                 items.set(0, drawerItem);
 
                 drawerOffset = 1;
-
-                // Load banner
-                mainActivity.loadBanner();
-
             }
         }
 
@@ -470,7 +466,7 @@ public class DrawerItemRecyclerViewAdapter extends RecyclerView.Adapter<DrawerIt
 
     DrawerItemRecyclerViewAdapter(Context context, MainActivity mainActivity, ArrayList<DrawerItem> serverItems, ArrayList<DrawerItem> actionItems, ArrayList<DrawerItem> settingsItems, ArrayList<DrawerItem> categoryItems) {
 
-        this.mainActivity = mainActivity;
+        DrawerItemRecyclerViewAdapter.mainActivity = mainActivity;
         this.context = context;
 
 

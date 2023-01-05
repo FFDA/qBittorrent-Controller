@@ -267,5 +267,5 @@
     <string name="action_add_url">Ajouter un lien torrent</string>
     <string name="pathAndLabelDialogText">Ne plus afficher ce message</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Message du chemin de sauvegarde et de l\'étiquette</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Activer le message du chemin de sauvegarde et de l\'étiquette</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Activer le message du chemin de sauvegarde et de l\'étiquette</string>
 </resources>

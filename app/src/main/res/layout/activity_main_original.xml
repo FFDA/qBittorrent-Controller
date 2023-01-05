@@ -6,7 +6,7 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:id="@+id/activity_main_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,22 +16,9 @@
     android:background="?windowBackground"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- android.support.v7.widget.RecyclerView
-
-        android:id="@+id/recyclerViewList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        card_view:cardCornerRadius="4dp"
-        card_view:contentPadding="8dp"></android.support.v7.widget.RecyclerView -->
-
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-    </ListView>
-
-
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

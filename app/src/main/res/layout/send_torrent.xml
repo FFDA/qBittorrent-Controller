@@ -12,6 +12,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="20dp"
+        android:labelFor="@+id/path_sent"
         android:text="@string/torrent_details_save_path" />
 
     <AutoCompleteTextView

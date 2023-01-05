@@ -10,7 +10,9 @@
 package com.lgallardo.qbittorrentclient;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +79,7 @@ public class ContentFilesRecyclerViewAdapter extends RecyclerView.Adapter<Conten
 
             // Set file priority
             if (recyclerItem.getAction().equals("setFilePriority")) {
-                TorrentDetailsFragment.fileContentRowPosition = getAdapterPosition();
+                TorrentDetailsFragment.fileContentRowPosition = getAbsoluteAdapterPosition();
                 mainActivity.openContextMenu(itemView);
             }
 
@@ -112,8 +114,9 @@ public class ContentFilesRecyclerViewAdapter extends RecyclerView.Adapter<Conten
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
+    @NonNull
     @Override
-    public ContentFilesRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ContentFilesRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 //        Log.d("Debug", "onCreateViewHolder invoked");
 
@@ -238,7 +241,7 @@ public class ContentFilesRecyclerViewAdapter extends RecyclerView.Adapter<Conten
 
     public String getPriorityString(int priority) {
 
-        String priorityString = "";
+        String priorityString;
 
 
         switch (priority) {

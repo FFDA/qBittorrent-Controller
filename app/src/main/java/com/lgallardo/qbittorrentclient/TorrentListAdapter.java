@@ -10,7 +10,6 @@
 package com.lgallardo.qbittorrentclient;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import java.util.Set;
 
 class TorrentListAdapter extends ArrayAdapter<String> {
 
-    private static HashMap<Integer, Boolean> mSelection = new HashMap<Integer, Boolean>();
+    private static HashMap<Integer, Boolean> mSelection = new HashMap<>();
     private String[] torrentsNames;
     private Torrent[] torrentsData;
     private Context context;
@@ -47,7 +46,6 @@ class TorrentListAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 //        View row = super.getView(position, convertView, parent);
-
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -114,10 +112,10 @@ class TorrentListAdapter extends ArrayAdapter<String> {
                 percentageTV.setText(Common.ProgressForUiTruncated(percentage) + "%");
             }
 
-            row.setBackgroundColor(getContext().getResources().getColor(android.R.color.background_light)); //default color
+            row.setBackgroundColor(getContext().getColor(android.R.color.background_light)); //default color
 
             if (mSelection.get(position) != null) {
-                row.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_blue_light));// this is a selected position so make it blue
+                row.setBackgroundColor(getContext().getColor(android.R.color.holo_blue_light));// this is a selected position so make it blue
             }
         } else {
 
@@ -141,7 +139,7 @@ class TorrentListAdapter extends ArrayAdapter<String> {
             icon.setVisibility(View.GONE);
             info.setVisibility(View.GONE);
 
-            row.setBackgroundColor(getContext().getResources().getColor(android.R.color.background_light)); //default color
+            row.setBackgroundColor(getContext().getColor(android.R.color.background_light)); //default color
 
         }
 

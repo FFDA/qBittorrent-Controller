@@ -12,8 +12,11 @@
  import android.app.AlarmManager;
  import android.app.AlertDialog;
  import android.app.AlertDialog.Builder;
- import android.app.FragmentManager;
- import android.app.FragmentTransaction;
+
+ import androidx.activity.result.ActivityResultLauncher;
+ import androidx.activity.result.contract.ActivityResultContracts;
+ import androidx.fragment.app.FragmentManager;
+ import androidx.fragment.app.FragmentTransaction;
  import android.app.Notification;
  import android.app.NotificationManager;
  import android.app.PendingIntent;
@@ -31,24 +34,23 @@
  import android.net.wifi.WifiInfo;
  import android.net.wifi.WifiManager;
  import android.os.AsyncTask;
- import android.os.Build;
  import android.os.Bundle;
  import android.os.Handler;
  import android.os.SystemClock;
  import android.preference.PreferenceManager;
  import android.provider.Settings;
- import android.support.annotation.NonNull;
- import android.support.v4.app.ActivityCompat;
- import android.support.v4.content.ContextCompat;
- import android.support.v4.view.GravityCompat;
- import android.support.v4.view.MenuItemCompat;
- import android.support.v4.widget.DrawerLayout;
- import android.support.v7.app.ActionBarDrawerToggle;
- import android.support.v7.app.AppCompatActivity;
- import android.support.v7.widget.LinearLayoutManager;
- import android.support.v7.widget.RecyclerView;
- import android.support.v7.widget.SearchView;
- import android.support.v7.widget.Toolbar;
+ import androidx.annotation.NonNull;
+ import androidx.core.app.ActivityCompat;
+ import androidx.core.content.ContextCompat;
+ import androidx.core.view.GravityCompat;
+ import androidx.core.view.MenuItemCompat;
+ import androidx.drawerlayout.widget.DrawerLayout;
+ import androidx.appcompat.app.ActionBarDrawerToggle;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ import androidx.appcompat.widget.SearchView;
+ import androidx.appcompat.widget.Toolbar;
  import android.util.Log;
  import android.view.ContextMenu;
  import android.view.LayoutInflater;
@@ -67,7 +69,6 @@
  import android.widget.TextView;
  import android.widget.Toast;
 
- import com.android.volley.AuthFailureError;
  import com.android.volley.NetworkResponse;
  import com.android.volley.NoConnectionError;
  import com.android.volley.Request;
@@ -77,12 +78,8 @@
  import com.android.volley.toolbox.JsonArrayRequest;
  import com.android.volley.toolbox.JsonObjectRequest;
  import com.android.volley.toolbox.StringRequest;
- import com.google.android.gms.ads.AdRequest;
- import com.google.android.gms.ads.AdView;
  import com.google.gson.Gson;
  import com.google.gson.reflect.TypeToken;
-
- import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
  import org.json.JSONArray;
  import org.json.JSONException;
@@ -109,7 +106,6 @@
  import java.util.List;
  import java.util.Map;
  import java.util.Set;
- import java.util.regex.Pattern;
 
  import static com.lgallardo.qbittorrentclient.DrawerItemRecyclerViewAdapter.actionItems;
 
@@ -322,9 +318,6 @@
      private Handler handler;
      private boolean canrefresh = true;
 
-     // Ads View
-     private AdView adView;
-
      // For checking if the app is visible
      private boolean activityIsVisible = true;
 
@@ -410,12 +403,12 @@
 //        Log.d("Debug", "[onCreate] getSettings OK");
 
          // Set alarm for checking completed torrents, if not set
-         if (PendingIntent.getBroadcast(getApplication(), 0, new Intent(getApplication(), NotifierService.class), PendingIntent.FLAG_NO_CREATE) == null) {
+         if (PendingIntent.getBroadcast(getApplication(), 0, new Intent(getApplication(), NotifierService.class), PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE) == null) {
 
              // Set Alarm for checking completed torrents
              alarmMgr = (AlarmManager) getApplication().getSystemService(Context.ALARM_SERVICE);
              Intent intent = new Intent(getApplication(), NotifierService.class);
-             alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, 0);
+                 alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
              alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                      SystemClock.elapsedRealtime() + 5000,
@@ -423,12 +416,12 @@
          }
 
 //        // Set alarm for RSS checking, if not set
-//        if (PendingIntent.getBroadcast(getApplication(), 0, new Intent(getApplication(), RSSService.class), PendingIntent.FLAG_NO_CREATE) == null) {
+//        if (PendingIntent.getBroadcast(getApplication(), 0, new Intent(getApplication(), RSSService.class), PendingIntent.FLAG_NO_CREATE|PendingIntent.FLAG_IMMUTABLE) == null) {
 //
 //            // Set Alarm for checking completed torrents
-//            alarmMgr = (AlarmManager) getApplication().getSystemService(Context.ALARM_SERVICE);
+//            alarmMgr = (onActivityResultAlarmManager) getApplication().getSystemService(Context.ALARM_SERVICE);
 //            Intent intent = new Intent(getApplication(), RSSService.class);
-//            alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, 0);
+//            alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, 0|PendingIntent.FLAG_IMMUTABLE);
 //
 //            alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 //                    SystemClock.elapsedRealtime() + 5000,
@@ -438,18 +431,11 @@
          // Set Theme (It must be fore inflating or setContentView)
          if (dark_ui) {
              this.setTheme(R.style.Theme_Dark);
-
-             if (Build.VERSION.SDK_INT >= 21) {
-                 getWindow().setNavigationBarColor(getResources().getColor(R.color.Theme_Dark_toolbarBackground));
-                 getWindow().setStatusBarColor(getResources().getColor(R.color.Theme_Dark_toolbarBackground));
-             }
+                 getWindow().setNavigationBarColor(getColor(R.color.Theme_Dark_toolbarBackground));
+                 getWindow().setStatusBarColor(getColor(R.color.Theme_Dark_toolbarBackground));
          } else {
              this.setTheme(R.style.Theme_Light);
-
-             if (Build.VERSION.SDK_INT >= 21) {
-                 getWindow().setNavigationBarColor(getResources().getColor(R.color.primary));
-             }
-
+                 getWindow().setNavigationBarColor(getColor(R.color.primary));
          }
 
          setContentView(R.layout.activity_main);
@@ -457,7 +443,7 @@
          toolbar = (Toolbar) findViewById(R.id.app_bar);
 
          if (dark_ui) {
-             toolbar.setBackgroundColor(getResources().getColor(R.color.Theme_Dark_primary));
+             toolbar.setBackgroundColor(getColor(R.color.Theme_Dark_primary));
          }
 
          setSupportActionBar(toolbar);
@@ -554,7 +540,7 @@
              /**
               * Called when a drawer has settled in a completely open state.
               */
-             public void onDrawerOpened(View drawerView) {
+             public void onDrawerOpeneFstartd(View drawerView) {
                  super.onDrawerOpened(drawerView);
                  // getSupportActionBar().setTitle(drawerTitle);
                  // setTitle(R.string.app_shortname);
@@ -605,7 +591,7 @@
              secondFragment = new AboutFragment();
 
              // Add the fragment to the 'list_frame' FrameLayout
-             FragmentManager fragmentManager = getFragmentManager();
+             FragmentManager fragmentManager = getSupportFragmentManager();
              FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
              if (fragmentManager.findFragmentByTag("firstFragment") == null) {
@@ -660,7 +646,7 @@
 //            }
 
              // Add the fragment to the 'list_frame' FrameLayout
-             FragmentManager fragmentManager = getFragmentManager();
+             FragmentManager fragmentManager = getSupportFragmentManager();
              FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
              if (fragmentManager.findFragmentByTag("firstFragment") == null) {
@@ -685,9 +671,6 @@
 
          handler = new Handler();
          handler.postDelayed(m_Runnable, refresh_period);
-
-         // Load banner
-         loadBanner();
 
 //        Log.d("Debug", "[onCreate] Finished");
 
@@ -756,7 +739,7 @@
          // Handle Item list empty due to Fragment stack
          try {
 
-             FragmentManager fm = getFragmentManager();
+             FragmentManager fm = getSupportFragmentManager();
              FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
              if (fm.getBackStackEntryCount() == 0 && firstFragment.getSecondFragmentContainer() == R.id.one_frame && fm.findFragmentById(R.id.one_frame) instanceof com.lgallardo.qbittorrentclient.ItemstFragment) {
@@ -821,22 +804,8 @@
          activityIsVisible = false;
      }
 
-     // Load Banner
-     public void loadBanner() {
-
-         if (packageName.equals("com.lgallardo.qbittorrentclient")) {
-
-             // Look up the AdView as a resource and load a request.
-             adView = (AdView) this.findViewById(R.id.adView);
-             AdRequest adRequest = new AdRequest.Builder().build();
-
-             // Start loading the ad in the background.
-             adView.loadAd(adRequest);
-         }
-     }
-
      @Override
-     public void onSaveInstanceState(Bundle outState) {
+     public void onSaveInstanceState(@NonNull Bundle outState) {
          super.onSaveInstanceState(outState);
          // TODO: Delete
          outState.putInt("itemPosition", itemPosition);
@@ -920,38 +889,58 @@
 //
 //        Log.d("Debug", "Item position: " + TorrentDetailsFragment.fileContentRowPosition);
 
-
-         switch (item.getItemId()) {
-
-             case R.id.action_file_dont_download:
-//                Log.d("Debug", "Don't download");
-                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 0);
-                 return true;
-             case R.id.action_file_normal_priority:
-//                Log.d("Debug", "Normal priority");
-                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 1);
-                 return true;
-             case R.id.action_file_high_priority:
-//                Log.d("Debug", "High priority");
-                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 6);
-                 return true;
-             case R.id.action_file_maximum_priority:
-//                Log.d("Debug", "Maximum priority");
-                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 7);
-                 return true;
-
-             default:
-//                Log.d("Debug", "default priority?");
-                 return super.onOptionsItemSelected(item);
+         if (item.getItemId() == R.id.action_file_dont_download) {
+//           Log.d("Debug", "Don't download");
+             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 0);
+             return true;
+         } else if (item.getItemId() == R.id.action_file_normal_priority) {
+ //          Log.d("Debug", "Normal priority");
+             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 1);
+             return true;
+         } else if (item.getItemId() == R.id.action_file_high_priority) {
+ //          Log.d("Debug", "High priority");
+             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 6);
+             return true;
+         } else if (item.getItemId() == R.id.action_file_high_priority) {
+//           Log.d("Debug", "Maximum priority");
+             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 7);
+             return true;
+         } else {
+//           Log.d("Debug", "default priority?");
+             return super.onOptionsItemSelected(item);
          }
+         //** Delete after check
+//         switch (item.getItemId()) {
+//
+//             case R.id.action_file_dont_download:
+////                Log.d("Debug", "Don't download");
+//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 0);
+//                 return true;
+//             case R.id.action_file_normal_priority:
+////                Log.d("Debug", "Normal priority");
+//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 1);
+//                 return true;
+//             case R.id.action_file_high_priority:
+////                Log.d("Debug", "High priority");
+//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 6);
+//                 return true;
+//             case R.id.action_file_maximum_priority:
+////                Log.d("Debug", "Maximum priority");
+//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 7);
+//                 return true;
+//
+//             default:
+////                Log.d("Debug", "default priority?");
+//                 return super.onOptionsItemSelected(item);
+//         }
+         //**
      }
 
 
      @Override
      public void setTitle(CharSequence title) {
          this.title = title;
-
-         if (currentCategory != null && currentCategory != "") {
+         if (currentCategory != null && currentCategory.equals("")) {
              getSupportActionBar().setTitle(title + " (" + currentCategory + ")");
          } else {
              getSupportActionBar().setTitle(title);
@@ -973,7 +962,7 @@
              return;
          }
 
-         FragmentManager fm = getFragmentManager();
+         FragmentManager fm = getSupportFragmentManager();
          com.lgallardo.qbittorrentclient.ItemstFragment fragment = null;
 
          // Close Contextual Action Bar
@@ -1091,7 +1080,7 @@
 
                          Gson gson = new Gson();
 
-                         Float responseFloat = Float.valueOf(-1);
+                         Float responseFloat = (float) -1;
 
                          try {
 
@@ -1102,7 +1091,7 @@
 
                              JSONObject jobj = new JSONObject(jsonString);
 
-                             Log.d("Debug", "[getApiVersion] jobj (string) => : " + jobj.toString());
+                             Log.d("Debug", "[getApiVersion] jobj (string) => : " + jobj);
 
                              //api = gson.fromJson(jsonString, Api.class);
 
@@ -1161,7 +1150,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1294,7 +1283,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
 //                 params.put("Host", hostname + ":" + port);
 //                 params.put("Referer", protocol + "://" + hostname + ":" + port);
@@ -1343,7 +1332,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1401,7 +1390,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1457,7 +1446,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1506,7 +1495,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1559,7 +1548,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1614,7 +1603,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1668,7 +1657,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1716,7 +1705,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1766,7 +1755,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1816,7 +1805,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1866,7 +1855,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1916,7 +1905,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -1967,7 +1956,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2018,7 +2007,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2070,7 +2059,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2119,7 +2108,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2174,7 +2163,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2224,7 +2213,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2273,7 +2262,7 @@
                      }
                  }) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2303,7 +2292,6 @@
      }
 
      private void addTorrentFileAPI7(final String hash, final String path2Set, final String category2Set, final VolleyCallback callback) {
-
 //         Log.d("Debug", "[addTorrentFileAPI7] path2set " + path2Set);
 //         Log.d("Debug", "[addTorrentFileAPI7] category2Set " + category2Set);
 
@@ -2316,9 +2304,13 @@
          String savepath = "";
 
          try {
-             fileBytesTemp = Common.fullyReadFileToBytes(file);
+             if (hash.startsWith("content")) {
+                 fileBytesTemp = Common.getBytes(getContentResolver().openInputStream(Uri.parse(hash)));
+             } else {
+                 fileBytesTemp = Common.fullyReadFileToBytes(file);
+             }
          } catch (IOException e) {
-             e.printStackTrace();
+                 e.printStackTrace();
          }
 
          final byte[] fileBytes = fileBytesTemp;
@@ -2366,7 +2358,7 @@
                      }
                  }) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2421,7 +2413,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2486,7 +2478,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2532,7 +2524,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2584,7 +2576,7 @@
                  }
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2612,7 +2604,7 @@
 
          final List<Torrent> torrents = new ArrayList<>();
 
-         String categoryEncoded = "";
+         String categoryEncoded;
          String url = buildURL();
 
          // Command
@@ -2645,20 +2637,10 @@
                  }
 
              } catch (Exception e) {
-                 Log.e("Debug", "[getTorrentListV] Category Exception: " + e.toString());
+                 Log.e("Debug", "[getTorrentListV] Category Exception: " + e.getMessage());
              }
 
          }
-
-
-//        Log.d("Debug: ", "[getTorrentListV] URL: " + url);
-//        Log.d("Debug: ", "[getTorrentListV] cookies: " + cookie);
-
-//        Log.d("Debug: ", "[getTorrentListV] category: " + category);
-//        Log.d("Debug: ", "[getTorrentListV] categoryEncoded: " + categoryEncoded);
-//        Log.d("Debug: ", "[getTorrentListV] url: " + url);
-
-//        Log.d("Debug: ", "[getTorrentListV] filter: " + state);
 
          JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                  Request.Method.GET,
@@ -2722,7 +2704,7 @@
 
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2835,7 +2817,7 @@
 
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -2913,7 +2895,7 @@
 
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -3004,7 +2986,7 @@
 
          ) {
              @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
+             public Map<String, String> getHeaders() {
                  Map<String, String> params = new HashMap<>();
                  params.put("User-Agent", "qBittorrent for Android");
 //                 params.put("Host", hostname + ":" + port);
@@ -3108,8 +3090,8 @@
 
          String[] hashesArray = hashes.split("\\|");
 
-         for (int i = 0; hashesArray.length > i; i++) {
-             startTorrent(hashesArray[i], true);
+         for (String s : hashesArray) {
+             startTorrent(s, true);
          }
 
          toastText(R.string.torrentsSelectedStarted);
@@ -3147,8 +3129,8 @@
 
          String[] hashesArray = hashes.split("\\|");
 
-         for (int i = 0; hashesArray.length > i; i++) {
-             forceStartTorrent(hashesArray[i], true);
+         for (String s : hashesArray) {
+             forceStartTorrent(s, true);
          }
 
          toastText(R.string.torrentsSelectedStarted);
@@ -3202,8 +3184,8 @@
 
          String[] hashesArray = hashes.split("\\|");
 
-         for (int i = 0; hashesArray.length > i; i++) {
-             pauseTorrent(hashesArray[i], true);
+         for (String s : hashesArray) {
+             pauseTorrent(s, true);
          }
 
          toastText(R.string.torrentsSelectedPaused);
@@ -3614,7 +3596,7 @@
                  getServerState();
                  getTransferInfo();
 
-                 String infoString = "";
+                 String infoString;
                  String sizeInfo, downloadedInfo, uploadedInfo, progressInfo, etaInfo, uploadSpeedInfo, downloadSpeedInfo, ratioInfo;
 
 //                Log.d("Debug", "[getTorrentList] torrents.size(): " + torrents.size());
@@ -3709,52 +3691,52 @@
                      //CustomLogger.saveReportMessage("Main", "qBittorrentTask - httpStatusCode: " + httpStatusCode);
                  }
 
-                 ArrayList<Torrent> torrentsFiltered = new ArrayList<Torrent>();
+                 ArrayList<Torrent> torrentsFiltered = new ArrayList<>();
 
                  // Categories
-                 String category = null;
+                 String category;
 
 
                  for (int i = 0; i < torrents.size(); i++) {
 
-                     if (currentState.equals("all") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("all") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          torrentsFiltered.add(torrents.get(i));
                      }
 
-                     if (currentState.equals("downloading") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("downloading") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("downloading".equals(torrents.get(i).getState()) || "stalledDL".equals(torrents.get(i).getState()) || "pausedDL".equals(torrents.get(i).getState())
                                  || "queuedDL".equals(torrents.get(i).getState()) || "checkingDL".equals(torrents.get(i).getState())) {
                              torrentsFiltered.add(torrents.get(i));
                          }
                      }
 
-                     if (currentState.equals("completed") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("completed") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("uploading".equals(torrents.get(i).getState()) || "stalledUP".equals(torrents.get(i).getState()) || "pausedUP".equals(torrents.get(i).getState())
                                  || "queuedUP".equals(torrents.get(i).getState()) || "checkingUP".equals(torrents.get(i).getState()) || "forcedUP".equals(torrents.get(i).getState())) {
                              torrentsFiltered.add(torrents.get(i));
                          }
                      }
 
-                     if (currentState.equals("seeding") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("seeding") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("uploading".equals(torrents.get(i).getState()) || "stalledUP".equals(torrents.get(i).getState()) || "forcedUP".equals(torrents.get(i).getState())) {
                              torrentsFiltered.add(torrents.get(i));
                          }
                      }
 
 
-                     if (currentState.equals("pause") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("pause") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("pausedDL".equals(torrents.get(i).getState()) || "pausedUP".equals(torrents.get(i).getState())) {
                              torrentsFiltered.add(torrents.get(i));
                          }
                      }
 
-                     if (currentState.equals("active") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("active") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("uploading".equals(torrents.get(i).getState()) || "downloading".equals(torrents.get(i).getState())) {
                              torrentsFiltered.add(torrents.get(i));
                          }
                      }
 
-                     if (currentState.equals("inactive") && (searchField == "" || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
+                     if (currentState.equals("inactive") && (searchField.equals("") || torrents.get(i).getName().toUpperCase().contains(searchField.toUpperCase()))) {
                          if ("pausedUP".equals(torrents.get(i).getState()) || "pausedDL".equals(torrents.get(i).getState()) || "queueUP".equals(torrents.get(i).getState())
                                  || "queueDL".equals(torrents.get(i).getState()) || "stalledUP".equals(torrents.get(i).getState())
                                  || "stalledDL".equals(torrents.get(i).getState())) {
@@ -3765,7 +3747,7 @@
                  }
 
                  // Categories
-                 final ArrayList<DrawerItem> categoryItems = new ArrayList<DrawerItem>();
+                 final ArrayList<DrawerItem> categoryItems = new ArrayList<>();
 
                  // Set uncategorized first
 
@@ -3916,7 +3898,7 @@
                          downloadSpeedCount += torrent.getDlspeed();
                          uploadSpeedCount += torrent.getUpspeed();
 
-                         Log.d("Debug", "[getTorrentList] torrent state: " + torrent.getState());
+//                         Log.d("Debug", "[getTorrentList] torrent state: " + torrent.getState());
 
                          for (String s : downloadingStates) {
                              if (s.equals(torrent.getState())) {
@@ -3970,14 +3952,14 @@
                          myadapter.notifyDataSetChanged();
 
                      } catch (IllegalStateException le) {
-                         Log.e("Debug", "IllegalStateException: " + le.toString());
+                         Log.e("Debug", "IllegalStateException: " + le);
                      }
 
                      // Create the about fragment
                      aboutFragment = new AboutFragment();
 
                      // Add the fragment to the 'list_frame' FrameLayout
-                     FragmentManager fragmentManager = getFragmentManager();
+                     FragmentManager fragmentManager = getSupportFragmentManager();
                      FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                      // Got some results
@@ -4108,7 +4090,7 @@
                      Log.e("ADAPTER", e.toString());
 
                      if (CustomLogger.isMainActivityReporting()) {
-                         CustomLogger.saveReportMessage("Main", "[qBittorrentTask - AdapterException]: " + e.toString());
+                         CustomLogger.saveReportMessage("Main", "[qBittorrentTask - AdapterException]: " + e);
                      }
                  }
 
@@ -4402,7 +4384,7 @@
 
      private void toastText(int message) {
 
-         if (activityIsVisible == true) {
+         if (activityIsVisible) {
              toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
              toast.show();
          }
@@ -4479,7 +4461,7 @@
 
      @Override
      protected void onNewIntent(Intent intent) {
-
+         super.onNewIntent(intent);
          handleIntent(intent);
      }
 
@@ -4566,14 +4548,14 @@
                  output.close();
              }
          } catch (IOException e) {
-             Log.e("Debug", "Can't write input stream to " + tempFile.toString() + ": " + e.toString());
+             Log.e("Debug", "Can't write input stream to " + tempFile + ": " + e);
          } finally {
              try {
                  if (input != null) {
                      input.close();
                  }
              } catch (IOException e) {
-                 Log.e("Debug", "Error closing the input stream " + tempFile.toString() + ": " + e.toString());
+                 Log.e("Debug", "Error closing the input stream " + tempFile + ": " + e);
              }
          }
 
@@ -4589,26 +4571,28 @@
 //        Log.d("Debug", "[handleUrlTorrent] urlTorrent: " + urlTorrent);
 //        Log.d("Debug", "[handleUrlTorrent] category2Set: " + category2Set);
 
-         // if there is not a path to the file, open de file picker
+         // if there is not a path to the file, open the file picker
          if (urlTorrent == null) {
-             openFilePicker();
+             getTorrentFileUri.launch(new String[]{"application/x-bittorrent"});
          } else {
-
              try {
-
-
                  // Handle format for torrent files on Downloaded list
+                 // This handles and *.torrent files added by user using File Picker
                  if (urlTorrent.substring(0, 7).equals("content")) {
-
-                     urlTorrent = getFileNameFromStream(getContentResolver().openInputStream(handledIntent.getData()));
-
+                     Uri torrentUri = Uri.parse(urlTorrent);
+                     if (torrentUri.getAuthority().contains("com.android.providers")) {
+                         // if *.torrent file was picked by the user
+                         addTorrentFile(urlTorrent);
+                     } else {
+                         // *.torrent files received by intent (from file manager, etc)
+                         urlTorrent = getFileNameFromStream(getContentResolver().openInputStream(handledIntent.getData()));
 //                    Log.d("Debug", "[handleUrlTorrent] urlTorrent path (content): " + urlTorrent);
+                     }
                  }
 
                  // Handle format for downloaded torrent files (Ex: /storage/emulated/0/Download/afile.torrent)
-                 if (urlTorrent.contains(".torrent") && urlTorrent.substring(0, 1).equals("/")) {
-
-                     if (urlTorrent.substring(0, 1).equals("/")) {
+                 if (urlTorrent.contains(".torrent") && urlTorrent.charAt(0) == '/') {
+                     if (urlTorrent.charAt(0) == '/') {
 
                          // Encode path
                          URI encodedUri = new URI(URLEncoder.encode(urlTorrent, "UTF-8"));
@@ -4624,25 +4608,23 @@
 
                  // Once formatted, add the torrent
                  if (urlTorrent.substring(0, 4).equals("file")) {
-
                      // File
                      urlTorrent = Uri.decode(URLEncoder.encode(urlTorrent, "UTF-8"));
                      addTorrentFile(Uri.parse(urlTorrent).getPath().replaceAll("\\+", "\\ "));
                  } else {
-
                      // Send magnet or torrent link
 //                    Log.d("Debug", "[handleUrlTorrent] urlTorrent 1: " + urlTorrent );
 
                      urlTorrent = Uri.decode(URLEncoder.encode(urlTorrent, "UTF-8"));
 
-
                      // If It is a valid torrent or magnet link
                      if (urlTorrent.contains(".torrent") || urlTorrent.contains("magnet:") || "application/x-bittorrent".equals(handledIntent.getType())) {
 //                        Log.d("Debug", "[handleUrlTorrent] URL: " + urlTorrent);
                          addTorrent(urlTorrent, path2Set, category2Set);
-                     } else {
+                     } else if (!urlTorrent.contains("content")) {
+                         // Had to add this check, otherwise app might get into "add torrent) loop
+                         // Needs a better fix
                          // Open not valid torrent or magnet link in browser
-
                          Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlTorrent));
                          startActivity(browserIntent);
                      }
@@ -4650,13 +4632,13 @@
                  }
 
              } catch (UnsupportedEncodingException e) {
-                 Log.e("Debug", "[handleUrlTorrent] Check URL: " + e.toString());
+                 Log.e("Debug", "[handleUrlTorrent] Check URL: " + e);
              } catch (NullPointerException e) {
-                 Log.e("Debug", "[handleUrlTorrent] urlTorrent is null: " + e.toString());
+                 Log.e("Debug", "[handleUrlTorrent] urlTorrent is null: " + e);
              } catch (IOException e) {
                  e.printStackTrace();
              } catch (Exception e) {
-                 Log.e("Debug", "[handleUrlTorrent] urlTorrent is not ok: " + e.toString());
+                 Log.e("Debug", "[handleUrlTorrent] urlTorrent is not ok: " + e);
              }
          }
      }
@@ -4733,7 +4715,6 @@
              // Permissions granted
              sendTorrent();
 //            handleUrlTorrent();
-
          }
 
 
@@ -4741,8 +4722,8 @@
 
 
      @Override
-     public void onRequestPermissionsResult(int requestCode,
-                                            String permissions[], int[] grantResults) {
+     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
          switch (requestCode) {
              case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                  // If request is cancelled, the result arrays are empty.
@@ -4771,7 +4752,6 @@
                                      }
                                  });
                      }
-                     return;
                  }
              }
          }
@@ -4852,7 +4832,7 @@
      public void popBackStackPhoneView() {
 
          // Set default toolbar behaviour
-         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
 
 
          actionBar.setDisplayHomeAsUpEnabled(false);
@@ -4898,248 +4878,281 @@
          // Enable title (just in case)
          getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-         switch (item.getItemId()) {
-
-             case R.id.action_refresh:
-                 swipeRefresh();
-                 return true;
-             case R.id.action_add_file:
-                 // Add torrent file
-                 openFilePicker();
-                 return true;
-             case R.id.action_add_url:
-                 // Add torrent URL
-                 addUrlTorrent();
-                 return true;
+//         switch (item.getItemId()) {
+         if (item.getItemId() == R.id.action_refresh) {
+//             case R.id.action_refresh:
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_add_file) {
+//             case R.id.action_add_file:
+             // Add torrent file
+//             openFilePicker();
+             this.getTorrentFileUri.launch(new String[]{"application/x-bittorrent"});
+             return true;
+         } else if (item.getItemId() == R.id.action_add_url) {
+//             case R.id.action_add_url:
+             // Add torrent URL
+             addUrlTorrent();
+             return true;
+         } else if (item.getItemId() == R.id.action_pause) {
 //            case R.id.action_rss:
 //                // Open RSS Activity
 //                Intent intent = new Intent(getBaseContext(), com.lgallardo.qbittorrentclient.RSSFeedActivity.class);
 //                startActivity(intent);
 //                return true;
-             case R.id.action_pause:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     pauseTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_resume:
-                 if (TorrentDetailsFragment.hashToUpdate != null) {
-                     startTorrent(TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_delete:
+//             case R.id.action_pause:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 pauseTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_resume) {
+//             case R.id.action_resume:
+             if (TorrentDetailsFragment.hashToUpdate != null) {
+                 startTorrent(TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_delete) {
+//             case R.id.action_delete:
 
-                 okay = false;
+             okay = false;
 
-                 if (!isFinishing()) {
+             if (!isFinishing()) {
 
-                     builder = new Builder(this);
+                 builder = new Builder(this);
 
-                     // Message
-                     builder.setMessage(R.string.dm_deleteTorrent).setTitle(R.string.dt_deleteTorrent);
+                 // Message
+                 builder.setMessage(R.string.dm_deleteTorrent).setTitle(R.string.dt_deleteTorrent);
 
-                     // Cancel
-                     builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             // User cancelled the dialog
+                 // Cancel
+                 builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         // User cancelled the dialog
 
-                             okay = false;
-                         }
-                     });
+                         okay = false;
+                     }
+                 });
 
-                     // Ok
-                     builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             // User accepted the dialog
+                 // Ok
+                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         // User accepted the dialog
 
-                             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                                 deleteTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+                         if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                             deleteTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
 
-                                 if (findViewById(R.id.one_frame) != null) {
-                                     popBackStackPhoneView();
-                                 }
+                             if (findViewById(R.id.one_frame) != null) {
+                                 popBackStackPhoneView();
                              }
-
                          }
-                     });
 
-                     // Create dialog
-                     dialog = builder.create();
+                     }
+                 });
 
-                     // Show dialog
-                     dialog.show();
-                 }
-                 return true;
-             case R.id.action_delete_drive:
+                 // Create dialog
+                 dialog = builder.create();
 
-                 if (!isFinishing()) {
-                     builder = new Builder(this);
+                 // Show dialog
+                 dialog.show();
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_delete_drive) {
+//         case R.id.action_delete_drive:
 
-                     // Message
-                     builder.setMessage(R.string.dm_deleteDriveTorrent).setTitle(R.string.dt_deleteDriveTorrent);
+             if (!isFinishing()) {
+                 builder = new Builder(this);
 
-                     // Cancel
-                     builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             // User canceled the dialog
-                         }
-                     });
+                 // Message
+                 builder.setMessage(R.string.dm_deleteDriveTorrent).setTitle(R.string.dt_deleteDriveTorrent);
 
-                     // Ok
-                     builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             // User accepted the dialog
-                             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                                 deleteDriveTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+                 // Cancel
+                 builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         // User canceled the dialog
+                     }
+                 });
 
-                                 if (findViewById(R.id.one_frame) != null) {
-                                     popBackStackPhoneView();
-                                 }
+                 // Ok
+                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         // User accepted the dialog
+                         if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                             deleteDriveTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+
+                             if (findViewById(R.id.one_frame) != null) {
+                                 popBackStackPhoneView();
                              }
-
                          }
-                     });
 
-                     // Create dialog
-                     dialog = builder.create();
+                     }
+                 });
 
-                     // Show dialog
-                     dialog.show();
+                 // Create dialog
+                 dialog = builder.create();
 
-                 }
-                 return true;
-             case R.id.action_force_start:
-                 if (TorrentDetailsFragment.hashToUpdate != null) {
-                     forceStartTorrent(TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_increase_prio:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     increasePrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_decrease_prio:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     decreasePrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_max_prio:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     maxPrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_min_prio:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     minPrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_resume_all:
-                 resumeAllTorrents();
-                 return true;
-             case R.id.action_pause_all:
-                 pauseAllTorrents();
-                 return true;
-             case R.id.action_upload_rate_limit:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     uploadRateLimitDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
+                 // Show dialog
+                 dialog.show();
 
-             case R.id.action_download_rate_limit:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     downloadRateLimitDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_recheck:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     recheckTorrents(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_first_last_piece_prio:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     toggleFirstLastPiecePrio(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_sequential_download:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     toggleSequentialDownload(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_set_category:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     setCategoryDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             case R.id.action_delete_category:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     setCategory(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate, " ");
-                 }
-                 return true;
-
-             case R.id.action_toggle_alternative_rate:
-                 toggleAlternativeSpeedLimits();
-                 return true;
-             case R.id.action_sortby_name:
-                 saveSortBy(SORTBY_NAME);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_size:
-                 saveSortBy(SORTBY_SIZE);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_eta:
-                 saveSortBy(SORTBY_ETA);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_priority:
-                 saveSortBy(SORTBY_PRIORITY);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_progress:
-                 saveSortBy(SORTBY_PROGRESS);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_ratio:
-                 saveSortBy(SORTBY_RATIO);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_downloadSpeed:
-                 saveSortBy(SORTBY_DOWNLOAD);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_uploadSpeed:
-                 saveSortBy(SORTBY_UPLOAD);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_added_on:
-                 saveSortBy(SORTBY_ADDEDON);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_completed_on:
-                 saveSortBy(SORTBY_COMPLETEDON);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_sortby_reverse_order:
-                 saveReverseOrder(!reverse_order);
-                 invalidateOptionsMenu();
-                 swipeRefresh();
-                 return true;
-             case R.id.action_add_tracker:
-                 if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
-                     addUrlTracker(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
-                 }
-                 return true;
-             default:
-                 return super.onOptionsItemSelected(item);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_force_start) {
+//         case R.id.action_force_start:
+             if (TorrentDetailsFragment.hashToUpdate != null) {
+                 forceStartTorrent(TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_increase_prio) {
+//         case R.id.action_increase_prio:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 increasePrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_decrease_prio) {
+//         case R.id.action_decrease_prio:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 decreasePrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_max_prio) {
+//         case R.id.action_max_prio:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 maxPrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_min_prio) {
+//         case R.id.action_min_prio:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 minPrioTorrent(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_resume_all) {
+//         case R.id.action_resume_all:
+             resumeAllTorrents();
+             return true;
+         } else if (item.getItemId() == R.id.action_pause_all) {
+//         case R.id.action_pause_all:
+             pauseAllTorrents();
+             return true;
+         } else if (item.getItemId() == R.id.action_upload_rate_limit) {
+//         case R.id.action_upload_rate_limit:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 uploadRateLimitDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_download_rate_limit) {
+//         case R.id.action_download_rate_limit:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 downloadRateLimitDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_recheck) {
+//         case R.id.action_recheck:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 recheckTorrents(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_first_last_piece_prio) {
+//         case R.id.action_first_last_piece_prio:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 toggleFirstLastPiecePrio(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_sequential_download) {
+//             case R.id.action_sequential_download:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 toggleSequentialDownload(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_set_category) {
+//         case R.id.action_set_category:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 setCategoryDialog(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_delete_category) {
+//             case R.id.action_delete_category:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 setCategory(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate, " ");
+             }
+             return true;
+         } else if (item.getItemId() == R.id.action_toggle_alternative_rate) {
+//             case R.id.action_toggle_alternative_rate:
+             toggleAlternativeSpeedLimits();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_name) {
+//         case R.id.action_sortby_name:
+             saveSortBy(SORTBY_NAME);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_size) {
+//         case R.id.action_sortby_size:
+             saveSortBy(SORTBY_SIZE);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_eta) {
+//         case R.id.action_sortby_eta:
+             saveSortBy(SORTBY_ETA);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_priority) {
+//         case R.id.action_sortby_priority:
+             saveSortBy(SORTBY_PRIORITY);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_progress) {
+//         case R.id.action_sortby_progress:
+             saveSortBy(SORTBY_PROGRESS);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_ratio) {
+//         case R.id.action_sortby_ratio:
+             saveSortBy(SORTBY_RATIO);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_downloadSpeed) {
+//         case R.id.action_sortby_downloadSpeed:
+             saveSortBy(SORTBY_DOWNLOAD);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_uploadSpeed) {
+//         case R.id.action_sortby_uploadSpeed:
+             saveSortBy(SORTBY_UPLOAD);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_added_on) {
+//         case R.id.action_sortby_added_on:
+             saveSortBy(SORTBY_ADDEDON);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_completed_on) {
+//         case R.id.action_sortby_completed_on:
+             saveSortBy(SORTBY_COMPLETEDON);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_sortby_reverse_order) {
+//         case R.id.action_sortby_reverse_order:
+             saveReverseOrder(!reverse_order);
+             invalidateOptionsMenu();
+             swipeRefresh();
+             return true;
+         } else if (item.getItemId() == R.id.action_add_tracker) {
+//         case R.id.action_add_tracker:
+             if (com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate != null) {
+                 addUrlTracker(com.lgallardo.qbittorrentclient.TorrentDetailsFragment.hashToUpdate);
+             }
+             return true;
+         } else {
+//             default:
+             return super.onOptionsItemSelected(item);
          }
      }
 
@@ -5189,14 +5202,14 @@
 
      @Override
      protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+         super.onActivityResult(requestCode, resultCode, data);
          if (requestCode == SETTINGS_CODE) {
 
 //            Log.d("Debug", "Notification alarm set");
 
              alarmMgr = (AlarmManager) getApplication().getSystemService(Context.ALARM_SERVICE);
              Intent intent = new Intent(getApplication(), NotifierService.class);
-             alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, 0);
+             alarmIntent = PendingIntent.getBroadcast(getApplication(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
              alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                      SystemClock.elapsedRealtime() + 5000,
@@ -5205,12 +5218,12 @@
 
          if (requestCode == OPTION_CODE) {
 
-             String json = "";
+             String json;
 
              // Get Options
              getOptions();
 
-             /***************************************
+             /* **************************************
               * Save qBittorrent's options remotely *
               ****************************************/
 
@@ -5263,20 +5276,20 @@
 
          }
 
-         if (requestCode == ADDFILE_CODE && resultCode == RESULT_OK) {
-
-             String file_path_value = "";
-
-             // MaterialDesignPicker
-             if (requestCode == ADDFILE_CODE && resultCode == RESULT_OK) {
-
-                 urlTorrent = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-
-                 sendTorrent();
-
-             }
-
-         }
+//         if (requestCode == ADDFILE_CODE && resultCode == RESULT_OK) {
+//
+//             String file_path_value = "";
+//
+//             // MaterialDesignPicker
+//             if (requestCode == ADDFILE_CODE && resultCode == RESULT_OK) {
+//
+//                 urlTorrent = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+//
+//                 sendTorrent();
+//
+//             }
+//
+//         }
 
      }
 
@@ -5386,7 +5399,6 @@
          // Retrieve preferences for options
          Intent intent = new Intent(getBaseContext(), OptionsActivity.class);
          startActivityForResult(intent, OPTION_CODE);
-
      }
 
      // This get qBittorrent options to save them in shared preferences variables and then open the Option activity
@@ -5403,7 +5415,7 @@
      protected void getPRO() {
          Intent intent = new Intent(
                  new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro")));
-         startActivityForResult(intent, GETPRO_CODE);
+         startActivity(intent);
      }
 
      public void addTorrentFile(String url) {
@@ -5805,7 +5817,7 @@
 
          builderPrefs = new StringBuilder();
 
-         builderPrefs.append("\n" + sharedPrefs.getString("language", "NULL"));
+         builderPrefs.append("\n").append(sharedPrefs.getString("language", "NULL"));
 
          // Get values from preferences
          currentServer = sharedPrefs.getString("currentServer", "1");
@@ -5955,8 +5967,8 @@
          keystore_password = sharedPrefs.getString("keystore_password" + currentServer, "");
 
          // Get path and category history
-         path_history = sharedPrefs.getStringSet("path_history", new HashSet<String>());
-         category_history = sharedPrefs.getStringSet("category_history", new HashSet<String>());
+         path_history = sharedPrefs.getStringSet("path_history", new HashSet<>());
+         category_history = sharedPrefs.getStringSet("category_history", new HashSet<>());
 
          pathAndCategoryDialog = sharedPrefs.getBoolean("pathAndCategoryDialog", true);
 
@@ -5969,7 +5981,7 @@
 
          builderPrefs = new StringBuilder();
 
-         builderPrefs.append("\n" + sharedPrefs.getString("language", "NULL"));
+         builderPrefs.append("\n").append(sharedPrefs.getString("language", "NULL"));
 
          // Get values from options
          global_max_num_connections = sharedPrefs.getString("global_max_num_connections", "0");
@@ -6013,7 +6025,7 @@
      protected void notifyCompleted(HashMap completedTorrents) {
 
          Intent intent = new Intent(this, MainActivity.class);
-         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
          // build notification
          // the addAction re-use the same intent to keep the example short
@@ -6132,7 +6144,7 @@
 
 
          if (findViewById(R.id.one_frame) != null) {
-             FragmentManager fragmentManager = getFragmentManager();
+             FragmentManager fragmentManager = getSupportFragmentManager();
 
              if (fragmentManager.findFragmentByTag("firstFragment") instanceof com.lgallardo.qbittorrentclient.TorrentDetailsFragment) {
                  // Reset back button stack
@@ -6157,10 +6169,6 @@
 
              // Actually refresh data
              refreshCurrent();
-
-             // Load banner
-             loadBanner();
-
          }
 
      }
@@ -6239,10 +6247,10 @@
          } else {
 
              // Permissions granted, open file picker
-             Intent intent = new Intent(getApplicationContext(), FilePickerActivity.class);
-             intent.putExtra(FilePickerActivity.ARG_FILE_FILTER, Pattern.compile(".*\\.torrent"));
-//            startActivityForResult(INTENT, RESULT_CODE);
-             startActivityForResult(intent, ADDFILE_CODE);
+//             Intent intent = new Intent(getApplicationContext(), FilePickerActivity.class);
+//             intent.putExtra(FilePickerActivity.ARG_FILE_FILTER, Pattern.compile(".*\\.torrent"));
+////            startActivityForResult(INTENT, RESULT_CODE);
+//             startActivityForResult(intent, ADDFILE_CODE);
 
          }
 
@@ -6288,7 +6296,7 @@
                          mFilter = new Filter() {
                              @Override
                              protected Filter.FilterResults performFiltering(CharSequence charSequence) {
-                                 List<String> listOfMatches = new ArrayList<String>();
+                                 List<String> listOfMatches = new ArrayList<>();
                                  if(charSequence != null) {
                                      for (int i = 0; i < mPaths.size(); i++) {
                                          String item = mPaths.get(i);
@@ -6323,12 +6331,12 @@
 
              // Path
              ArrayAdapter<String> pathAdapter = new ContainsArrayAdapter (
-                     this, android.R.layout.simple_list_item_1, new ArrayList<String>(path_history));
+                     this, android.R.layout.simple_list_item_1, new ArrayList<>(path_history));
              pathTextView.setAdapter(pathAdapter);
 
              // Category
              ArrayAdapter<String> categoryAdapter = new ContainsArrayAdapter (
-                     this, android.R.layout.simple_list_item_1, new ArrayList<String>(category_history));
+                     this, android.R.layout.simple_list_item_1, new ArrayList<>(category_history));
              categoryTextView.setAdapter(categoryAdapter);
 
              // Checkbox value
@@ -6420,4 +6428,16 @@
          }
 
      }
+
+     /**
+      * Launches FilePicker
+      * if user picks a file sets urlTorrent to uri.string()
+      * and launches sendTorrent();
+      */
+     ActivityResultLauncher<String[]> getTorrentFileUri = registerForActivityResult(new ActivityResultContracts.OpenDocument(), result -> {
+         if (result != null) {
+             urlTorrent = result.toString();
+             sendTorrent();
+         }
+     });
  }

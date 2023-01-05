@@ -8,12 +8,12 @@
  */
 package com.lgallardo.qbittorrentclient;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,8 +35,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -56,7 +54,6 @@ import static com.lgallardo.qbittorrentclient.MainActivity.keystore_password;
 import static com.lgallardo.qbittorrentclient.MainActivity.keystore_path;
 import static com.lgallardo.qbittorrentclient.MainActivity.port;
 import static com.lgallardo.qbittorrentclient.MainActivity.protocol;
-import static com.lgallardo.qbittorrentclient.MainActivity.subfolder;
 
 
 public class TorrentDetailsFragment extends Fragment {
@@ -108,9 +105,6 @@ public class TorrentDetailsFragment extends Fragment {
     private Torrent torrent;
     public static SwipeRefreshLayout mSwipeRefreshLayout;
     private RefreshListener refreshListener;
-
-    // AdView for ads
-    private AdView adView;
 
     public static int fileContentRowPosition;
 
@@ -405,12 +399,7 @@ public class TorrentDetailsFragment extends Fragment {
 
 
         } catch (Exception e) {
-            Log.e("Debug", "[TorrentDetailsFragment] onCreateView: " + e.toString());
-        }
-
-        if (MainActivity.packageName.equals("com.lgallardo.qbittorrentclient")) {
-            // Load banner
-            loadBanner();
+            Log.e("Debug", "[TorrentDetailsFragment] onCreateView: " + e);
         }
 
         return rootView;
@@ -1047,19 +1036,6 @@ public class TorrentDetailsFragment extends Fragment {
             }
 
         }
-    }
-
-    // Load Banner method
-    public void loadBanner() {
-
-        // Get the adView.
-        adView = (AdView) getActivity().findViewById(R.id.adView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        // Start loading the ad in the background.
-        adView.loadAd(adRequest);
-
     }
 
     public void setTorrent(Torrent torrent) {

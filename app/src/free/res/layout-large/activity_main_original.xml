@@ -6,7 +6,7 @@
   ~   http://www.gnu.org/licenses/lgpl.html
   ~
   -->
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.core.widget.SwipeRefreshLayout
     android:id="@+id/activity_main_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,4 +19,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.core.widget.SwipeRefreshLayout>

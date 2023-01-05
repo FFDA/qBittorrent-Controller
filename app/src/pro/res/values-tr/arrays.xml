@@ -62,6 +62,7 @@
     <item>İlerleme</item>
     <item>Oran</item>
     <item>İndirme Hızı</item>
+    <item>Yükleme Hızı</item>
     <item>Eklenme Tarihi</item>
     <item>Tamamlanma Tarihi</item>
   </string-array>
@@ -87,7 +88,6 @@
     <item>Etkin Değil</item>
     <item>Seçenekler</item>
     <item>Ayarlar</item>
-    <item>Pro Sürümü Al</item>
     <item>Yardım</item>
   </string-array>
   <string-array name="scheduler_days">

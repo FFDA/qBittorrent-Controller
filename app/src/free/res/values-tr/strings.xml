@@ -270,6 +270,6 @@ Android ayarlarından bu izni vermek ister misiniz?</string>
   <string name="action_add_url">Sel bağlantı ekleyin</string>
   <string name="action_add_file">Torrent dosyasını ekleyin</string>
   <string name="pathAndLabelDialogText">Bu ileti dizisini tekrar gösterme</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Kaydetme yolunu ve kategori iletişim kutusunu etkinleştir</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Kaydetme yolunu ve kategori iletişim kutusunu etkinleştir</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Yol ve kategori iletişim kutusunu kaydet</string>
 </resources>

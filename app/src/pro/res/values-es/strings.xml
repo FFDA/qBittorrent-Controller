@@ -43,7 +43,7 @@
     <string name="drawer_open">Abrir menú de navegación</string>
     <string name="drawer_close">Cierre el menú de navegación</string>
     <string name="drawer_servers_category">Servidores</string>
-    <string name="getQBittorrentPrefefrences">Obteniendo opciones ...</string>
+    <string name="getQBittorrentPrefefrences">Obteniendo opciones …</string>
     <string name="setQBittorrentPrefefrences">Guardando opciones</string>
     <string name="setUploadRateLimit">Límite de subida cambiado</string>
     <string name="setDownloadRateLimit">Límite de bajada cambiado</string>
@@ -108,7 +108,7 @@
     <string name="settings_qbittorrent_autorefresh_category">Refrescado automático</string>
     <string name="settings_qbittorrent_autorefresh_title">¿Refrescar automáticamente?</string>
     <string name="settings_qbittorrent_autorefresh_summary">Actualizar listado de torrents </string>
-    <string name="settings_qbittorrent_refresh_period_title">Refrescar cada...</string>
+    <string name="settings_qbittorrent_refresh_period_title">Refrescar cada…</string>
     <string name="settings_qbittorrent_timeouts_category">Tiempos de espera</string>
     <string name="settings_qbittorrent_connection_timeout_title">Tiempo de conexión</string>
     <string name="settings_qbittorrent_connection_timeout_summary">Tiempo en segundos hasta que una conexión es establecida</string>
@@ -140,15 +140,15 @@
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">Máximo de torrents activos</string>
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">Máximo de torrents activos?</string>
     <string name="search_title">Buscar</string>
-    <string name="search_hint">Buscar...</string>
+    <string name="search_hint">Buscar…</string>
     <string name="dialog_add_url">Añadir URL aquí</string>
     <string name="dialog_download_rate_limit">Límite de bajada (KiB/s)</string>
     <string name="dialog_upload_rate_limit">Límite de subida (KiB/s)</string>
     <string name="title_activity_settings">Configuración</string>
     <string name="torrent_details_name">Nombre:</string>
     <string name="settings_qbittorrent_sort_category">Ordenar lista de torrents</string>
-    <string name="settings_qbittorrent_sortby_summary">Ordenar por...</string>
-    <string name="settings_qbittorrent_sortby_dialog_title">Ordenar por...</string>
+    <string name="settings_qbittorrent_sortby_summary">Ordenar por…</string>
+    <string name="settings_qbittorrent_sortby_dialog_title">Ordenar por…</string>
     <string name="settings_qbittorrent_reverse_order_dialog_title">Invertir orden?</string>
     <string name="settings_qbittorrent_reverse_order_summary">Invertir orden</string>
     <string name="torrentsSelectedDeleted">Torrents borrados!</string>
@@ -169,7 +169,7 @@
     <string name="torrent_details_torrent_first_last_piece_first">Descargar primera y última parte primero</string>
     <string name="torrent_details_torrent_sequential">Descargar en orden secuencial</string>
     <string name="torrent_details_first_last">Primera y últimas partes</string>
-    <string name="torrent_priority_menu">Prioridad...</string>
+    <string name="torrent_priority_menu">Prioridad…</string>
     <string name="torrent_details_seq_download">Decarga secuencial</string>
     <string name="sortby_menu_name">Nombre</string>
     <string name="sortby_menu_size">Tamaño</string>
@@ -182,8 +182,8 @@
     <string name="torrentstoggleSequentialDownload">Cambiando descarga secuencial</string>
     <string name="torrentstogglefisrtLastPiecePrio">Cambiando prioridad!</string>
     <string name="settings_qbittorrent_notifications_category">Notificaciones</string>
-    <string name="settings_qbittorrent_notifications_period_summary">Revisar cada...</string>
-    <string name="settings_qbittorrent_notifications_period_title">Revisar torrents cada...</string>
+    <string name="settings_qbittorrent_notifications_period_summary">Revisar cada…</string>
+    <string name="settings_qbittorrent_notifications_period_title">Revisar torrents cada…</string>
     <string name="settings_qbittorrent_notifications_summary">Chequear en segundo plano</string>
     <string name="settings_qbittorrent_notifications_title">Habilitar notificaciones</string>
     <string name="notifications_total">Total</string>
@@ -208,7 +208,7 @@
     <string name="dialog_add_rss_filter">Filtro</string>
     <string name="dialog_label_rss">Nombre </string>
     <string name="error_rss">No se pudo obtener RSS</string>
-    <string name="settings_qbittorrent_advanced">Opciones avanzadas...</string>
+    <string name="settings_qbittorrent_advanced">Opciones avanzadas…</string>
     <string name="notifications_rss_available">Nuevos torrents disponibles</string>
     <string name="options_qbittorrent_schedule_alternative_rate_limits">Programar el uso de límites alternativos</string>
     <string name="options_qbittorrent_schedule_alt_from">De</string>
@@ -249,8 +249,8 @@
     <string name="error_permission2">Se requiere acceso de almacenamiento para listar directorios y archivos!</string>
     <string name="sortby_menu_added_on">Añadido</string>
     <string name="sortby_menu_completed_on">Completado</string>
-    <string name="sortby_menu_date">Fecha...</string>
-    <string name="sortby_menu_speed">Velocidad...</string>
+    <string name="sortby_menu_date">Fecha…</string>
+    <string name="sortby_menu_speed">Velocidad…</string>
     <string name="torrent_details_addedon">Añadido:</string>
     <string name="torrent_details_completedon">Completado:</string>
     <string name="drawer_category_categories">Categorías</string>
@@ -259,13 +259,13 @@
     <string name="torrent_details_category">Categoría:</string>
     <string name="action_delete_category">Borrar categoría</string>
     <string name="action_set_category">Definir categoría</string>
-    <string name="torrent_category_menu">Categoría...</string>
+    <string name="torrent_category_menu">Categoría…</string>
     <string name="torrentsApplyingChange">Aplicando cambio!</string>
     <string name="action_add_tracker">Añadir tracker</string>
     <string name="help_libraries">Software usadado:</string>
     <string name="action_add_file">Añadir archivo torrent</string>
     <string name="action_add_url">Añadir enlace torrent</string>
     <string name="pathAndLabelDialogText">No volver a mostrar este diálogo</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Habilitar diálogo de salvar ruta y categoría</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Habilitar diálogo de salvar ruta y categoría</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Cuadro de diálogo de ruta y categoría</string>
 </resources>

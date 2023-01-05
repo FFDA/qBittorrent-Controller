@@ -276,7 +276,7 @@
   <string name="action_add_url">Gehitu torrent esteka</string>
   <string name="pathAndLabelDialogText">Ez da elkarrizketa hau berriro erakutsi</string>
   <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Gorde bidea eta etiketa elkarrizketa-</string>
-  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Gaitu gorde bidea eta kategoria elkarrizketa-koadroa</string>
+  <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Gaitu gorde bidea eta kategoria elkarrizketa-koadroa</string>
 </resources>
 
 

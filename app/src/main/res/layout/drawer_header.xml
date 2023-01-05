@@ -14,5 +14,4 @@
     android:background="@color/primary_dark"
     android:orientation="vertical"
     android:weightSum="1">
-    />
 </RelativeLayout>

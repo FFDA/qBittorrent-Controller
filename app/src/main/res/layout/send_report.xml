@@ -17,14 +17,16 @@
         android:layout_width="wrap_content"
         android:textSize="16sp"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:text="@string/dialog_send_report" />
+        android:paddingStart="5dp"
+        android:text="@string/dialog_send_report"
+        android:labelFor="@+id/report_description"/>
 
     <EditText
         android:id="@+id/report_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        android:inputType="text">
 
         <requestFocus />
     </EditText>

@@ -43,7 +43,7 @@
     <string name="drawer_open">Öppen navigering låda</string>
     <string name="drawer_close">Stäng navigering låda</string>
     <string name="drawer_servers_category">Servrar</string>
-    <string name="getQBittorrentPrefefrences">Att få alternativ...</string>
+    <string name="getQBittorrentPrefefrences">Att få alternativ…</string>
     <string name="setQBittorrentPrefefrences">Alternativ sparade!</string>
     <string name="setUploadRateLimit">Uppladdningshastighetsgränsen har satts</string>
     <string name="setDownloadRateLimit">Den nedladdningshastighet gräns har satts</string>
@@ -107,7 +107,7 @@
     <string name="settings_qbittorrent_autorefresh_category">Automatisk Uppdatera</string>
     <string name="settings_qbittorrent_autorefresh_title">Uppdatera automatiskt?</string>
     <string name="settings_qbittorrent_autorefresh_summary">Uppdatera torrent lista</string>
-    <string name="settings_qbittorrent_refresh_period_title">Uppdatera varje... </string>
+    <string name="settings_qbittorrent_refresh_period_title">Uppdatera varje… </string>
     <string name="settings_qbittorrent_timeouts_category">Tidsgränser</string>
     <string name="settings_qbittorrent_connection_timeout_title">Timeout anslutning</string>
     <string name="settings_qbittorrent_connection_timeout_summary">Timeout i sekunder tills en anslutning upprättas</string>
@@ -139,15 +139,15 @@
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_title">Maximum active torrents</string>
     <string name="options_qbittorrent_torrent_queueing_max_active_torrents_dialog_title">Maximum active torrents?</string>
     <string name="search_title">Sök</string>
-    <string name="search_hint">Sök...</string>
+    <string name="search_hint">Sök…</string>
     <string name="dialog_add_url">Lägg till länk här</string>
     <string name="dialog_download_rate_limit">Nedladdningshastighet gräns (KiB/s)</string>
     <string name="dialog_upload_rate_limit">Överför hastighetsgränser (KiB/s)</string>
     <string name="title_activity_settings">Inställningar</string>
     <string name="torrent_details_name">Namn:</string>
     <string name="settings_qbittorrent_sort_category">Sortera listan</string>
-    <string name="settings_qbittorrent_sortby_dialog_title">Sortera efter...</string>
-    <string name="settings_qbittorrent_sortby_summary">Sortera efter...</string>
+    <string name="settings_qbittorrent_sortby_dialog_title">Sortera efter…</string>
+    <string name="settings_qbittorrent_sortby_summary">Sortera efter…</string>
     <string name="torrent_details_eta">Beräknad tid:</string>
     <string name="settings_qbittorrent_reverse_order_dialog_title">Omvänd ordning?</string>
     <string name="settings_qbittorrent_reverse_order_summary">Omvänd ordning</string>
@@ -169,7 +169,7 @@
     <string name="torrentsRecheck">Verifiering initieras</string>
     <string name="torrent_details_torrent_first_last_piece_first">Hämta första och sista biten först</string>
     <string name="torrent_details_torrent_sequential">Hämta sekventiellt</string>
-    <string name="torrent_priority_menu">Prioritet...</string>
+    <string name="torrent_priority_menu">Prioritet…</string>
     <string name="torrent_details_first_last">Första och sista bitarna</string>
     <string name="torrent_details_seq_download">Sekventiell nedladdning</string>
     <string name="sortby_menu_name">Namn</string>
@@ -183,8 +183,8 @@
     <string name="torrentstoggleSequentialDownload">Ändra sekventiell nedladdning!</string>
     <string name="torrentstogglefisrtLastPiecePrio">Ändra prioritet!</string>
     <string name="settings_qbittorrent_notifications_category">Aviseringar</string>
-    <string name="settings_qbittorrent_notifications_period_summary">Verifiera var...</string>
-    <string name="settings_qbittorrent_notifications_period_title">Verifiera torrent var...</string>
+    <string name="settings_qbittorrent_notifications_period_summary">Verifiera var…</string>
+    <string name="settings_qbittorrent_notifications_period_title">Verifiera torrent var…</string>
     <string name="settings_qbittorrent_notifications_summary">Bakgrundskontroll</string>
     <string name="settings_qbittorrent_notifications_title">Aktivera aviseringar</string>
     <string name="notifications_total">Totalt</string>
@@ -209,7 +209,7 @@
     <string name="dialog_add_rss_filter">Filtrera</string>
     <string name="dialog_label_rss">Namn</string>
     <string name="error_rss">Det gick inte att få RSS</string>
-    <string name="settings_qbittorrent_advanced">Alternativ avancerat...</string>
+    <string name="settings_qbittorrent_advanced">Alternativ avancerat…</string>
     <string name="notifications_rss_available">Nya torrents tillgängliga</string>
     <string name="options_qbittorrent_schedule_alternative_rate_limits">Schemalägg användning av alternativa hastighetsgränser</string>
     <string name="options_qbittorrent_schedule_alt_from">Från</string>
@@ -248,8 +248,8 @@
     <string name="error_permission">Tillgång lagring krävs för att hämta och skicka torrentfiler!</string>
     <string name="error_grant_permission2">Krävs lagring tillgång för att lista kataloger och filer!\n\nVill du ge tillstånd i Android-inställningar?</string>
     <string name="error_permission2">Krävs lagring tillgång för att lista kataloger och filer!</string>
-    <string name="sortby_menu_speed">Hastighet...</string>
-    <string name="sortby_menu_date">Datum...</string>
+    <string name="sortby_menu_speed">Hastighet…</string>
+    <string name="sortby_menu_date">Datum…</string>
     <string name="sortby_menu_completed_on">Slutförd</string>
     <string name="sortby_menu_added_on">Lades till</string>
     <string name="torrent_details_addedon">Lades till:</string>
@@ -258,7 +258,7 @@
     <string name="drawer_category_all">Alla</string>
     <string name="drawer_category_uncategorized">Omärkt</string>
     <string name="torrent_details_category">Kategori:</string>
-    <string name="torrent_category_menu">Kategori...</string>
+    <string name="torrent_category_menu">Kategori…</string>
     <string name="torrentsApplyingChange">Applicering av förändring!</string>
     <string name="action_delete_category">Radera kategori!</string>
     <string name="action_set_category">Definiera kategori</string>
@@ -267,6 +267,6 @@
     <string name="action_add_file">Lägg torrent fil</string>
     <string name="action_add_url">Lägga torrent länk</string>
     <string name="pathAndLabelDialogText">Visar inte den här dialogrutan igen</string>
-    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_sumary">Aktivera spara väg och kategori dialog</string>
+    <string name="settings_qbittorrent_pathAndLabelDialog_dialog_summary">Aktivera spara väg och kategori dialog</string>
     <string name="settings_qbittorrent_pathAndLabelDialog_dialog_title">Spara bana och kategori dialog</string>
 </resources>

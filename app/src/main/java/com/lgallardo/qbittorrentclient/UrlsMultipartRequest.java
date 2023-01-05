@@ -1,7 +1,4 @@
 package com.lgallardo.qbittorrentclient;
-
-import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -32,7 +29,7 @@ public class UrlsMultipartRequest extends Request<NetworkResponse> {
                 if (params.get(key) != null) {
                     sbPost.append("--" + boundary + "\r\n");
                     sbPost.append("Content-Disposition: form-data; name=\"" + key + "\"" + "\r\n\r\n");
-                    sbPost.append(params.get(key).toString());
+                    sbPost.append(params.get(key));
                 }
             }
         }
