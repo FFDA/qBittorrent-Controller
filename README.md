@@ -1,7 +1,7 @@
-qBittorrent-Controller
+qBittorrent-Controller+
 ==================
 
-This is the repository for **_qBittorrent Controller_**, an Android app for manage for [qBittorrent](http://www.qbittorrent.org/) remotely.
+This is the repository for **_qBittorrent Controller+_**, an Android app for manage for [qBittorrent](http://www.qbittorrent.org/) remotely. Forked from [qBittorrent-Controller](https://github.com/lgallard/qBittorrent-Controller)
 
 ## Features
 
@@ -24,5 +24,4 @@ This is the repository for **_qBittorrent Controller_**, an Android app for mana
 ![](https://github.com/lgallard/lgallard.github.io/blob/master/images/qbc-tablet-list-dark_o.png)
 
 ## Download
-* [Google Play Store](https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclient)
-* [GitHub](https://github.com/lgallard/qBittorrent-Client/releases)
+* [GitHub](https://github.com/FFDA/qBittorrent-Controller/releases)

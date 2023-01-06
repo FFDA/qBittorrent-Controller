@@ -71,7 +71,7 @@
     <Preference
         android:title="@string/settings_qbittorrent_advanced"
         android:key="advanced"
-        android:fragment="com.lgallardo.qbittorrentclient.SettingsAdvancedFragment"/>
+        android:fragment="lt.ffda.qbittorrentcontrollerplus.SettingsAdvancedFragment"/>
 
     <PreferenceCategory
         android:key="Autorefresh"

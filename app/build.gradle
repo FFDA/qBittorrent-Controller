@@ -42,61 +42,37 @@ configurations {
 
 
 android {
-
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
-        applicationId 'com.lgallardo.qbittorrentclient'
+        applicationId 'lt.ffda.qbittorrentcontrollerplus'
         minSdk 23
-        targetSdkVersion 33
-        archivesBaseName = "qBittorrentClient_v" + versionName
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+
+        archivesBaseName = "qBittorrentController+_v" + versionName
 
         // Stops the Gradle plugin’s automatic rasterization of vectors
         // Check https://medium.com/@chrisbanes/appcompat-v23-2-age-of-the-vectors-91cbafa87c88#.nja9kkcvj
-
-//        generatedDensities = []
-
         vectorDrawables.useSupportLibrary = true
-//        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
 
-        debug {debuggable true
-
+        debug {
+            debuggable true
             minifyEnabled true
-            shrinkResources false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
     }
 
-    flavorDimensions "default"
-
-    productFlavors {
-       pro {
-            applicationId 'com.lgallardo.qbittorrentclientpro'
-            versionName '4.9.2'
-            minSdkVersion 23
-            targetSdkVersion 31
-           archivesBaseName = "qBittorrentController_v" + versionName
-            versionCode 4920
-            dimension "default"
-        }
-        free {
-            applicationId "com.lgallardo.qbittorrentclient"
-            versionName '4.9.2'
-            minSdkVersion 23
-            targetSdkVersion 31
-            archivesBaseName = "qBittorrentController_v" + versionName
-            versionCode 4920
-            dimension "default"
-        }
-    }
     packagingOptions {
         resources {
             excludes += ['META-INF/DEPENDENCIES', 'META-INF/DEPENDENCIES.txt', 'META-INF/dependencies.txt', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/LGPL2.1']
@@ -106,6 +82,7 @@ android {
     installation {
         timeOutInMs 600000
     }
+
     lint {
         abortOnError false
     }
@@ -116,25 +93,17 @@ repositories {
 }
 
 dependencies {
-
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.7.0'
-//    implementation 'com.google.android.gms:play-services-ads:21.1.0'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.activity:activity:1.6.1'
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-
-
-//    dependencies {
-//        implementation 'com.nbsp:library:1.08'
-//    }
-
 
     // Robotium
     dependencies {

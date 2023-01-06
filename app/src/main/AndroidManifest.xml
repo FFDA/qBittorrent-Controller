@@ -35,7 +35,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="preferExternal"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.lgallardo.qbittorrentclient">
+    package="lt.ffda.qbittorrentcontrollerplus">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -55,7 +55,7 @@
         tools:replace="android:label"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".MainActivity"
+            android:name="lt.ffda.qbittorrentcontrollerplus.MainActivity"
             android:label="@string/app_shortname"
             android:launchMode="singleTask"
             android:exported="true">
@@ -170,15 +170,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="lt.ffda.qbittorrentcontrollerplus.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme_Light" />
         <activity
-            android:name=".OptionsActivity"
+            android:name="lt.ffda.qbittorrentcontrollerplus.OptionsActivity"
             android:label="Options"
             android:theme="@style/Theme_Light" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".AboutActivity"
+        <activity android:name="lt.ffda.qbittorrentcontrollerplus.HelpActivity" />
+        <activity android:name="lt.ffda.qbittorrentcontrollerplus.AboutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="${applicationId}.AboutActivity" />
@@ -193,11 +193,11 @@
             android:name="com.google.android.gms.APPLICATION_ID"
             android:value="ca-app-pub-1035265933040074~4972554890"/>
 
-        <receiver android:name=".NotifierService" />
+        <receiver android:name="lt.ffda.qbittorrentcontrollerplus.NotifierService" />
 
         <!-- Set alarm on boot -->
         <receiver
-            android:name=".DeviceBootReceiver"
+            android:name="lt.ffda.qbittorrentcontrollerplus.DeviceBootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

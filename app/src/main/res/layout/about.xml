@@ -47,7 +47,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/help_app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/qBittorrent_logo"
@@ -55,7 +55,7 @@
                 android:text="@string/app_name" />
 
             <ImageView
-                android:id="@+id/qBittorrent_logo"
+                android:id="@+id/help_qBittorrent_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -65,7 +65,7 @@
                 android:src="@mipmap/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/help_license"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView2"
@@ -75,7 +75,7 @@
                 android:text="@string/about_help1" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/help_contributors_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/textView3"
@@ -86,7 +86,7 @@
 
             <TextView
 
-                android:id="@+id/textView2"
+                android:id="@+id/help_app_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView1"
