@@ -70,7 +70,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -342,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 
     // Auto-refresh
     private Handler handler;
-    private boolean canrefresh = true;
+    private boolean canRefresh = true;
 
     // For checking if the app is visible
     private boolean activityIsVisible = true;
@@ -775,8 +774,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                     fragmentTransaction.commit();
 
                     // Set title
-//                    setTitle(navigationDrawerItemTitles[drawerList.getCheckedItemPosition()]);
-//                    setTitle(navigationDrawerItemTitles[DrawerItemRecyclerViewAdapter.actionPosition]);
                     setSelectionAndTitle(lastState);
 
                     // Close Contextual Action Bar
@@ -799,8 +796,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 fragmentTransaction.commit();
 
                 // Set title
-//                setTitle(navigationDrawerItemTitles[drawerList.getCheckedItemPosition()]);
-//                setTitle(navigationDrawerItemTitles[DrawerItemRecyclerViewAdapter.actionPosition]);
                 setSelectionAndTitle(lastState);
 
                 // Close Contextual Action Bar
@@ -834,7 +829,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     private final Runnable m_Runnable = new Runnable() {
         public void run() {
 
-            if (auto_refresh && canrefresh && activityIsVisible) {
+            if (auto_refresh && canRefresh && activityIsVisible) {
                 refreshCurrent();
             }
 
@@ -882,21 +877,9 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 
 //        if (v.getId() == R.id.theList) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-
-
-//        Log.d("Debug", "Chosen: " + menuInfo.toString());
-//        Log.d("Debug", "Chosen: " + info.position);
-
-//        Log.d("Debug", "View id: " + v.getId());
-//        Log.d("Debug", "View id: " + R.id.RecyclerViewTrackers);
-
-
         if (v.getId() == R.id.RecyclerViewContentFiles) {
-
             getMenuInflater().inflate(R.menu.menu_file_contextual, menu);
         }
-
-
 //        }
     }
 
@@ -904,55 +887,21 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
-//        Log.d("Debug", "Item name: " + getResources().getResourceEntryName(item.getItemId()));
-//
-//        Log.d("Debug", "Item position: " + TorrentDetailsFragment.fileContentRowPosition);
-
         if (item.getItemId() == R.id.action_file_dont_download) {
-//           Log.d("Debug", "Don't download");
             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 0);
             return true;
         } else if (item.getItemId() == R.id.action_file_normal_priority) {
-//          Log.d("Debug", "Normal priority");
             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 1);
             return true;
         } else if (item.getItemId() == R.id.action_file_high_priority) {
-//          Log.d("Debug", "High priority");
             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 6);
             return true;
         } else if (item.getItemId() == R.id.action_file_high_priority) {
-//           Log.d("Debug", "Maximum priority");
             setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 7);
             return true;
         } else {
-//           Log.d("Debug", "default priority?");
             return super.onOptionsItemSelected(item);
         }
-//** Delete after check
-//         switch (item.getItemId()) {
-//
-//             case R.id.action_file_dont_download:
-////                Log.d("Debug", "Don't download");
-//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 0);
-//                 return true;
-//             case R.id.action_file_normal_priority:
-////                Log.d("Debug", "Normal priority");
-//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 1);
-//                 return true;
-//             case R.id.action_file_high_priority:
-////                Log.d("Debug", "High priority");
-//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 6);
-//                 return true;
-//             case R.id.action_file_maximum_priority:
-////                Log.d("Debug", "Maximum priority");
-//                 setFilePrio(TorrentDetailsFragment.hashToUpdate, TorrentDetailsFragment.fileContentRowPosition, 7);
-//                 return true;
-//
-//             default:
-////                Log.d("Debug", "default priority?");
-//                 return super.onOptionsItemSelected(item);
-//         }
-//**
     }
 
 
@@ -1269,29 +1218,17 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
 //                        Log.d("Debug", "[getCookieV] Error in JSON response: " + error.getMessage());
-
                         callback.onSuccess("");
 
                         NetworkResponse networkResponse = error.networkResponse;
 
                         if (networkResponse != null) {
 //                            Log.d("Debug", "[getCookieV] statusCode: " + networkResponse.statusCode);
-
-
                             if (networkResponse.statusCode == 403) {
 //                                Log.d("Debug", "[getCookieV] trying to gen new cookie - connection403ErrorCounter: " + connection403ErrorCounter);
 
                                 Toast.makeText(getApplicationContext(), "User's IP is banned for too many failed login attempts!", Toast.LENGTH_SHORT).show();
-
-//                                if (connection403ErrorCounter <= 2) {
-//                                    getApi();
-//                                }
-//
-//                                if(connection403ErrorCounter > 2) {
-//                                    Toast.makeText(getApplicationContext(), "Please check your account settings!", Toast.LENGTH_SHORT).show();
-//                                }
                             }
                         } else {
 
@@ -2253,11 +2190,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 //         Log.d("Debug", "[addTorrentUrls] category2Set " + category2Set);
 
         byte[] multipartBody = null;
-
-        String category = "";
-        String savepath = "";
-
-
         String url = buildURL();
 
         // Command
@@ -2318,7 +2250,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
         byte[] fileBytesTemp = null;
         final File file = new File(hash);
         String category = "";
-        String savepath = "";
+        String savePath = "";
 
         try {
             if (hash.startsWith("content")) {
@@ -2338,7 +2270,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
         try {
 
             // Send file multipart form data necessary after file data
-            // Category and savepath are set in the multipart body
+            // Category and savePath are set in the multipart body
             buildPart(boundary, dos, fileBytes, file.getName());
 
             // End of file
@@ -2770,9 +2702,9 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 
 //                        Log.d("Debug: ", "[getCategoryListV] onResponse");
 
-                        Iterator<String> iter = response.keys();
-                        while (iter.hasNext()) {
-                            String key = iter.next();
+                        Iterator<String> iterator = response.keys();
+                        while (iterator.hasNext()) {
+                            String key = iterator.next();
                             String name, savePath;
                             try {
                                 JSONObject value = (JSONObject) response.get(key);
@@ -2799,7 +2731,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 //                            Log.d("Debug", "[getTorrentListV] Connection error!");
                             Toast.makeText(getApplicationContext(), "Connection error!", Toast.LENGTH_SHORT).show();
@@ -2827,8 +2758,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                         // Log error
                         Log.d("Debug", "[getCategoryListV] Error in JSON response: " + error.getMessage());
                         Log.d("Debug", "[getCategoryListV] Error in JSON error: " + error);
-
-
                     }
                 }
 
@@ -4443,7 +4372,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 
 //            Log.d("Debug", "Search for..." + searchField);
 
-            // Autorefresh
+            // Auto-refresh
             refreshSwipeLayout();
             refreshCurrent();
         }
@@ -4456,7 +4385,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
             // // Activity is visible
             activityIsVisible = true;
 
-            // Autorefresh
+            // Auto-refresh
             refreshCurrent();
 
         }
@@ -4476,10 +4405,10 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 // Add torrent (file, url or magnet)
                 addTorrentByIntent(intent);
 
-                // Activity is visble
+                // Activity is visible
                 activityIsVisible = true;
 
-                // Autorefresh
+                // Auto-refresh
                 refreshCurrent();
             }
 
@@ -4558,7 +4487,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                     }
                 }
 
-                // Handle format for downloaded torrent files (Ex: /storage/emulated/0/Download/afile.torrent)
+                // Handle format for downloaded torrent files (Ex: /storage/emulated/0/Download/file.torrent)
                 if (urlTorrent.contains(".torrent") && urlTorrent.charAt(0) == '/') {
                     if (urlTorrent.charAt(0) == '/') {
 
@@ -4755,7 +4684,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
             }
         });
 
-        // This must be implemented to override defaul searchview behaviour, in order to
+        // This must be implemented to override default searchView behaviour, in order to
         // make it work with tablets
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -4777,7 +4706,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(menuItem.getActionView().getWindowToken(), 0);
 
-                // Here true means, override default searchview query
+                // Here true means, override default searchView query
                 return true;
             }
 
@@ -5147,7 +5076,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
         // Commit changes
         editor.apply();
 
-        canrefresh = true;
+        canRefresh = true;
         //refreshSwipeLayout();
 
         refresh();
@@ -5218,13 +5147,13 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
             setQBittorrentPrefefrences(json);
 
             // Now it can be refreshed
-            canrefresh = true;
+            canRefresh = true;
 
         }
 
         if (requestCode == HELP_CODE && resultCode == RESULT_OK) {
             // Now it can be refreshed
-            canrefresh = true;
+            canRefresh = true;
 
             refreshSwipeLayout();
             refreshCurrent();
@@ -5342,7 +5271,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
 
 
     protected void openSettings() {
-        canrefresh = false;
+        canRefresh = false;
 
         Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
         startActivityForResult(intent, SETTINGS_CODE);
@@ -5350,7 +5279,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     }
 
     protected void openHelp() {
-        canrefresh = false;
+        canRefresh = false;
 
         Intent intent = new Intent(getBaseContext(), HelpActivity.class);
         intent.putExtra("current", lastState);
@@ -5359,7 +5288,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     }
 
     private void openOptions() {
-        canrefresh = false;
+        canRefresh = false;
         // Retrieve preferences for options
         Intent intent = new Intent(getBaseContext(), OptionsActivity.class);
         startActivityForResult(intent, OPTION_CODE);
