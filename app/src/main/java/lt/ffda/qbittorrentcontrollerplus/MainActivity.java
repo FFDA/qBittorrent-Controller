@@ -3772,9 +3772,8 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 categoryItems.add(new DrawerItem(R.drawable.ic_drawer_subitem, category, DRAWER_CATEGORY, (currentCategory.equals(category)), "category"));
 
                 // Add uncategorized
-                // TODO: Uncomment to enable uncategorized item
-//                category = getResources().getString(R.string.drawer_category_uncategorized);
-//                categoryItems.add(new DrawerItem(R.drawable.ic_drawer_subitem, category, DRAWER_CATEGORY, currentCategory.equals(category) || currentCategory.equals(""), "category"));
+                category = getResources().getString(R.string.drawer_category_uncategorized);
+                categoryItems.add(new DrawerItem(R.drawable.ic_drawer_subitem, category, DRAWER_CATEGORY, currentCategory.equals(category) || currentCategory.equals(""), "category"));
 
                 if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
