@@ -631,7 +631,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
             // Second fragment will be added in ItemsFragment's onListItemClick method
 
         } else {
-
             // Phones handle just one fragment
 
             // Create an instance of ItemsFragments
@@ -792,7 +791,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
             }
             if (fm.getBackStackEntryCount() == 0 && firstFragment.getSecondFragmentContainer() == R.id.content_frame && (fm.findFragmentByTag("secondFragment") instanceof AboutFragment)) {
 
-// Create the about fragment
+                // Create the about fragment
                 aboutFragment = new AboutFragment();
 
                 fragmentTransaction.replace(R.id.content_frame, aboutFragment, "secondFragment");
@@ -827,7 +826,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-// TODO: Delete
+        // TODO: Delete
         outState.putInt("itemPosition", itemPosition);
     }
 
@@ -2250,10 +2249,8 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     }
 
     private void addTorrentUrls(final String urls, final String path2Set, final String category2Set, final VolleyCallback callback) {
-
 //         Log.d("Debug", "[addTorrentUrls] path2set " + path2Set);
 //         Log.d("Debug", "[addTorrentUrls] category2Set " + category2Set);
-
 
         byte[] multipartBody = null;
 
@@ -2271,14 +2268,14 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 new Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
-// Return value
+                        // Return value
                         callback.onSuccess("");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//Toast.makeText(context, "Upload failed!\r\n" + error.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Upload failed!\r\n" + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -4734,7 +4731,7 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
         menu.findItem(R.id.action_rss).setVisible(false);
 
         // Retrieve the SearchView and plug it into SearchManager
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
