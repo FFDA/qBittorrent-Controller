@@ -5981,7 +5981,6 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
     }
 
     protected void notifyCompleted(HashMap completedTorrents) {
-
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -5995,17 +5994,12 @@ public class MainActivity extends AppCompatActivity implements RefreshListener {
                 .setContentIntent(pIntent)
                 .setAutoCancel(true);
 
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        Notification notification;
-
-        notification = builder.getNotification();
+        Notification notification = builder.build();
 
         notificationManager.notify(0, notification);
-
-
     }
 
     private void saveLastState(String state) {
