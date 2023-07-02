@@ -3,7 +3,6 @@ qBittorrent-Controller+
 
 **Abandoned**
 It should still run on Android 11+ devices, but there will be no updates for this repo.
-
 I recommend using [qBitController](https://github.com/Bartuzen/qBitController)
 
 This is the repository for **_qBittorrent Controller+_**, an Android app for manage for [qBittorrent](http://www.qbittorrent.org/) remotely. Forked from [qBittorrent-Controller](https://github.com/lgallard/qBittorrent-Controller)
